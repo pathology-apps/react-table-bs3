@@ -1,32 +1,49 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TableHead from './TableHead'
-import TableBody from './TableBody'
-import { DndProvider } from 'react-dnd'
-import { HTML5Backend } from 'react-dnd-html5-backend'
+import DataHeader from './DataHeader'
+import DataTableView from './DataTableView'
+import DataFooter from './DataFooter'
 
-function Table({table}) {
-    return (
-        <DndProvider backend={HTML5Backend}>
-            <table
-                className="table table-condensed table-bordered"
-                {...{
-                    style: {
-                        minWidth: '100%',
-                        width: table.getCenterTotalSize(),
-                        tableLayout: 'fixed',
-                    },
-                }}
-            >
-                <TableHead table={table} />
-                <TableBody table={table} />
-            </table>
-        </DndProvider>
-    )
+function BootstrapTable({
+    table,
+    loading,
+    loadingOffset,
+    requestedPage,
+    setRequestedPage,
+    viewRef,
+}) {
+    return table ? (
+        <div className="panel panel-default panel-table">
+            <div className="panel-heading">
+                <DataHeader table={table} />
+            </div>
+            <div className="panel-body">
+                <DataTableView
+                    table={table}
+                    loading={loading}
+                    loadingOffset={loadingOffset}
+                    viewRef={viewRef}
+                />
+            </div>
+            <div className="panel-footer">
+                <DataFooter
+                    table={table}
+                    requestedPage={requestedPage}
+                    setRequestedPage={setRequestedPage}
+                    loading={loading}
+                />
+            </div>
+        </div>
+    ) : null
 }
 
-Table.propTypes = {
+BootstrapTable.propTypes = {
     table: PropTypes.object.isRequired,
+    loading: PropTypes.bool,
+    loadingOffset: PropTypes.number,
+    requestedPage: PropTypes.number,
+    setRequestedPage: PropTypes.func,
+    viewRef: PropTypes.object,
 }
 
-export default Table
+export default BootstrapTable

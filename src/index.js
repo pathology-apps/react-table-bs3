@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import DataHeader from './DataHeader'
 import DataTableView from './DataTableView'
 import DataFooter from './DataFooter'
+import GroupingButton from './GroupingButton'
+import * as filters from './Filters'
 
 function BootstrapTable({
     table,
@@ -47,3 +49,8 @@ BootstrapTable.propTypes = {
 }
 
 export default BootstrapTable
+
+export { 
+    filters,
+    GroupingButton,
+}

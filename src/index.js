@@ -4,7 +4,7 @@ import DataHeader from './DataHeader'
 import DataTableView from './DataTableView'
 import DataFooter from './DataFooter'
 import GroupingButton from './GroupingButton'
-import * as filters from './Filters'
+import {tableFilter, valueFilter} from './Filters'
 
 function BootstrapTable({
     table,
@@ -51,6 +51,7 @@ BootstrapTable.propTypes = {
 export default BootstrapTable
 
 export { 
-    filters,
+    tableFilter,
+    valueFilter,
     GroupingButton,
 }

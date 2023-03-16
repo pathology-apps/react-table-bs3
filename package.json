@@ -1,8 +1,8 @@
 {
   "name": "@pathappdev/react-table-bs3",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "Bootstrap 3 layout for @tanstack/react-table",
-  "main": "src/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "build": "parcel build src/index.js"
   },

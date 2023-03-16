@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 
 function DebouncedInput({
@@ -7,13 +7,13 @@ function DebouncedInput({
     debounce = 500,
     ...props
 }) {
-    const [value, setValue] = React.useState(initialValue)
+    const [value, setValue] = useState(initialValue)
 
-    React.useEffect(() => {
+    useEffect(() => {
         setValue(initialValue)
     }, [initialValue])
 
-    React.useEffect(() => {
+    useEffect(() => {
         const timeout = setTimeout(() => {
             onChange(value)
         }, debounce)

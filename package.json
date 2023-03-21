@@ -1,41 +1,34 @@
 {
   "name": "@pathappdev/react-table-bs3",
-  "version": "0.0.7",
   "description": "Bootstrap 3 layout for @tanstack/react-table",
-  "main": "dist/index.js",
+  "version": "0.0.10",
+  "source": "src/index.js",
+  "main": "dist/main.js",
   "scripts": {
-    "build": "parcel build src/index.js"
+    "watch": "parcel watch",
+    "build": "parcel build"
   },
   "dependencies": {
-    "@tanstack/react-table": "^8.0.0",
     "classnames": "^2.3.2",
-    "prop-types": "^15.8.1",
-    "react-dnd": "^16.0.1",
-    "react-dnd-html5-backend": "^16.0.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.21.3",
-    "@babel/preset-env": "^7.20.2",
-    "babel-core": "^6.26.3",
-    "babel-plugin-transform-class-properties": "^6.24.1",
-    "babel-preset-react": "^6.24.1",
-    "parcel-bundler": "^1.12.5"
-  },
-  "peerDependencies": {
-    "@tanstack/react-table": "^8.0.0",
+    "@tanstack/react-table": "^8.7.9",
+    "parcel": "^2.8.3",
     "react": "^18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
     "react-dom": "^18.2.0"
   },
-  "keywords": [
-    "tanstack",
-    "@tanstack/react-table",
-    "react-table",
-    "bootstrap",
-    "bootstrap3",
-    "bs3"
-  ],
+  "peerDependencies": {
+    "@tanstack/react-table": "^8.7.9",
+    "react": "^18.2.0",
+    "react-dnd": "^16.0.1",
+    "react-dnd-html5-backend": "^16.0.1",
+    "react-dom": "^18.2.0"
+  },
+  "author": "Brian Royer",
+  "license": "ISC",
   "publishConfig": {
     "access": "public"
   }

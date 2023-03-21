@@ -1,6 +1,6 @@
 {
   "name": "@pathappdev/react-table-bs3",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "Bootstrap 3 layout for @tanstack/react-table",
   "main": "dist/index.js",
   "scripts": {
@@ -12,7 +12,8 @@
     "prop-types": "^15.8.1",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
-    "react": "^18.2.0"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.21.3",
@@ -20,9 +21,7 @@
     "babel-core": "^6.26.3",
     "babel-plugin-transform-class-properties": "^6.24.1",
     "babel-preset-react": "^6.24.1",
-    "parcel-bundler": "^1.12.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "parcel-bundler": "^1.12.5"
   },
   "peerDependencies": {
     "@tanstack/react-table": "^8.0.0",

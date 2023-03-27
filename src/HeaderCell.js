@@ -1,9 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import HeaderTools from './HeaderTools'
 import classNames from 'classnames'
 import {flexRender} from '@tanstack/react-table'
 
-function HeaderCell({header}) {
+function HeaderCell({table, header}) {
     return (
         <th
             {...{
@@ -20,8 +21,6 @@ function HeaderCell({header}) {
                     maxWidth: header.getSize(),
                     wordWrap: 'break-word',
                     position: 'relative',
-                    padding: 0,
-                    margin: 0,
                 },
                 onClick: header.column.getCanSort()
                     ? header.column.getToggleSortingHandler()
@@ -47,6 +46,7 @@ function HeaderCell({header}) {
                               header.column.columnDef.header,
                               header.getContext(),
                           )}
+                    <HeaderTools key={`${header.id}_headerTools`} table={table} header={header} />
                 </div>
                 <div
                     {...{

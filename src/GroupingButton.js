@@ -12,9 +12,9 @@ function GroupingButton({row}) {
             }}
         >
             {row.getIsExpanded() ? (
-                <i className="fa fa-fw fa-object-ungroup" />
+                <span className="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
             ) : (
-                <i className="fa fa-fw fa-object-group" />
+                <span className="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
             )}
         </button>
     )

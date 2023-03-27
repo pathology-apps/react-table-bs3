@@ -6,22 +6,33 @@
   "main": "dist/main.js",
   "scripts": {
     "watch": "parcel watch",
-    "build": "parcel build"
+    "build": "parcel build",
+    "storybook": "storybook dev --host 0.0.0.0 -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
+    "bootstrap": "^3.4.1",
     "classnames": "^2.3.2",
     "prop-types": "^15.8.1"
   },
   "devDependencies": {
-    "@tanstack/react-table": "^8.7.9",
+    "@storybook/addon-essentials": "^7.0.0-rc.7",
+    "@storybook/addon-interactions": "^7.0.0-rc.7",
+    "@storybook/addon-links": "^7.0.0-rc.7",
+    "@storybook/blocks": "^7.0.0-rc.7",
+    "@storybook/react": "^7.0.0-rc.7",
+    "@storybook/react-webpack5": "^7.0.0-rc.7",
+    "@storybook/testing-library": "^0.0.14-next.1",
+    "@tanstack/react-table": "^8.8.4",
     "parcel": "^2.8.3",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "storybook": "^7.0.0-rc.7"
   },
   "peerDependencies": {
-    "@tanstack/react-table": "^8.7.9",
+    "@tanstack/react-table": "^8.8.4",
     "react": "^18.2.0",
     "react-dnd": "^16.0.1",
     "react-dnd-html5-backend": "^16.0.1",

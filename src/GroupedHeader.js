@@ -19,12 +19,9 @@ function GroupedHeader({header, table}) {
                         }}
                     >
                         {header.column.getIsGrouped() ? (
-                            <i className="fa fa-fw fa-ban" aria-hidden="true" />
+                            <span className="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
                         ) : (
-                            <i
-                                className="fa fa-fw fa-object-group"
-                                aria-hidden="true"
-                            />
+                            <span className="glyphicon glyphicon-duplicate" aria-hidden="true"></span>
                         )}
                     </button>
                 </span>

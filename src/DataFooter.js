@@ -7,42 +7,44 @@ import PageSizeSelector from './PageSizeSelector'
 
 function DataFooter({table, loading, requestedPage, setRequestedPage}) {
     return (
-        <div className="row">
-            <div className="col col-xs-12">
-                <div
-                    style={{
-                        display: 'flex',
-                        gap: '.5em',
-                        justifyContent: 'space-evenly',
-                    }}
-                >
-                    <div style={{display: 'contents'}}>
-                        <PreviousButton table={table} loading={loading} />
-                    </div>
+        <div className="well well-sm">
+            <div className="row">
+                <div className="col col-xs-12">
                     <div
                         style={{
-                            minWidth: '200px',
                             display: 'flex',
-                            justifyContent: 'center',
+                            gap: '.5em',
+                            justifyContent: 'space-evenly',
                         }}
                     >
-                        <PageSelector
-                            table={table}
-                            requestedPage={requestedPage}
-                            setRequestedPage={setRequestedPage}
-                        />
-                    </div>
-                    <div
-                        style={{
-                            minWidth: '200px',
-                            display: 'flex',
-                            justifyContent: 'center',
-                        }}
-                    >
-                        <PageSizeSelector table={table} />
-                    </div>
-                    <div style={{display: 'contents'}}>
-                        <NextButton table={table} loading={loading} />
+                        <div style={{display: 'contents'}}>
+                            <PreviousButton table={table} loading={loading} />
+                        </div>
+                        <div
+                            style={{
+                                minWidth: '200px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <PageSelector
+                                table={table}
+                                requestedPage={requestedPage}
+                                setRequestedPage={setRequestedPage}
+                            />
+                        </div>
+                        <div
+                            style={{
+                                minWidth: '200px',
+                                display: 'flex',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <PageSizeSelector table={table} />
+                        </div>
+                        <div style={{display: 'contents'}}>
+                            <NextButton table={table} loading={loading} />
+                        </div>
                     </div>
                 </div>
             </div>

@@ -1,10 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import DataHeader from './DataHeader'
 import DataTableView from './DataTableView'
 import DataFooter from './DataFooter'
 import GroupingButton from './GroupingButton'
 import {tableFilter, valueFilter} from './Filters'
+import './index.css'
 
 function BootstrapTable({
     table,
@@ -15,27 +15,20 @@ function BootstrapTable({
     viewRef,
 }) {
     return table ? (
-        <div className="panel panel-default panel-table">
-            <div className="panel-heading">
-                <DataHeader table={table} />
-            </div>
-            <div className="panel-body">
-                <DataTableView
-                    table={table}
-                    loading={loading}
-                    loadingOffset={loadingOffset}
-                    viewRef={viewRef}
-                />
-            </div>
-            <div className="panel-footer">
-                <DataFooter
-                    table={table}
-                    requestedPage={requestedPage}
-                    setRequestedPage={setRequestedPage}
-                    loading={loading}
-                />
-            </div>
-        </div>
+        <>
+            <DataTableView
+                table={table}
+                loading={loading}
+                loadingOffset={loadingOffset}
+                viewRef={viewRef}
+            />
+            <DataFooter
+                table={table}
+                requestedPage={requestedPage}
+                setRequestedPage={setRequestedPage}
+                loading={loading}
+            />
+        </>
     ) : null
 }
 

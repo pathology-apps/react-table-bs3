@@ -10,7 +10,6 @@ function DataTableView({viewRef, loading, loadingOffset, table}) {
             style={{
                 overflowX: loading ? 'hidden' : 'auto',
                 position: 'relative',
-                minHeight: '500px',
             }}
         >
             <LoadingScreen loading={loading} loadingOffset={loadingOffset} />

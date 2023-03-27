@@ -4,7 +4,7 @@ import HeaderRow from './HeaderRow'
 import FilteredHeaderRow from './FilteredHeaderRow'
 
 function HeaderGroup({headerGroup, table}) {
-    return headerGroup.id !== '0' ? (
+    return (
         <>
             <HeaderRow 
                 headerGroup={headerGroup}
@@ -12,7 +12,7 @@ function HeaderGroup({headerGroup, table}) {
             />
             <FilteredHeaderRow headerGroup={headerGroup} table={table} />
         </>
-    ) : null
+    )
 }
 
 HeaderGroup.propTypes = {

@@ -1,10 +1,10 @@
+require("./main.css");
 var $gXNCa$reactjsxruntime = require("react/jsx-runtime");
 var $gXNCa$react = require("react");
 var $gXNCa$proptypes = require("prop-types");
-var $gXNCa$tanstackreacttable = require("@tanstack/react-table");
-var $gXNCa$classnames = require("classnames");
 var $gXNCa$reactdnd = require("react-dnd");
 var $gXNCa$reactdndhtml5backend = require("react-dnd-html5-backend");
+var $gXNCa$tanstackreacttable = require("@tanstack/react-table");
 
 function $parcel$interopDefault(a) {
   return a && a.__esModule ? a.default : a;
@@ -29,34 +29,13 @@ $parcel$export(module.exports, "GroupingButton", () => $c1dc35055a36ee94$export$
 
 
 
-function $700784874ae6a088$var$DataHeader({ table: table  }) {
-    const headerGroups = table.getHeaderGroups();
-    if (!headerGroups.length) return null;
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-        className: "row",
-        children: (0, $gXNCa$tanstackreacttable.flexRender)(headerGroups[0].headers[0].column?.columnDef.header, headerGroups[0].headers[0].getContext())
-    });
-}
-$700784874ae6a088$var$DataHeader.propTypes = {
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $700784874ae6a088$export$2e2bcd8739ae039 = $700784874ae6a088$var$DataHeader;
-
-
-
-
-
-
-
 
 
 function $13ef7f0473e481e2$var$LoadingScreen({ loading: loading , loadingOffset: loadingOffset  }) {
     if (!loading) return null;
+    const className = `loading ${loading ? "progress" : ""}`;
     return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-        className: (0, ($parcel$interopDefault($gXNCa$classnames)))({
-            loading: true,
-            progress: loading
-        }),
+        className: className,
         style: {
             left: loadingOffset
         },
@@ -103,55 +82,6 @@ var $13ef7f0473e481e2$export$2e2bcd8739ae039 = $13ef7f0473e481e2$var$LoadingScre
 
 
 
-function $09b54aa5e2e7fc75$var$HeaderCell({ header: header  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("th", {
-        colSpan: header.colSpan,
-        className: header.column.getCanSort() ? (0, ($parcel$interopDefault($gXNCa$classnames)))({
-            asc: header.column.getIsSorted() === "asc",
-            desc: header.column.getIsSorted() === "desc",
-            sortable: true
-        }) : undefined,
-        style: {
-            width: header.getSize(),
-            maxWidth: header.getSize(),
-            wordWrap: "break-word",
-            position: "relative",
-            padding: 0,
-            margin: 0
-        },
-        onClick: header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined,
-        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("div", {
-            style: {
-                display: "flex",
-                width: "100%",
-                justifyContent: "center",
-                alignItems: "center"
-            },
-            children: [
-                /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-                    style: {
-                        display: "inline-block"
-                    },
-                    children: header.isPlaceholder ? null : (0, $gXNCa$tanstackreacttable.flexRender)(header.column.columnDef.header, header.getContext())
-                }),
-                /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-                    onClick: (e)=>e.stopPropagation(),
-                    onMouseDown: header.getResizeHandler(),
-                    onTouchStart: header.getResizeHandler(),
-                    className: `resizer ${header.column.getIsResizing() ? "isResizing" : ""}`
-                })
-            ]
-        })
-    });
-}
-$09b54aa5e2e7fc75$var$HeaderCell.propTypes = {
-    header: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $09b54aa5e2e7fc75$export$2e2bcd8739ae039 = $09b54aa5e2e7fc75$var$HeaderCell;
-
-
-
-
 
 const $e08f3ccbd063a785$var$reorderColumn = (draggedColumnId, targetColumnId, columnOrder)=>{
     columnOrder.splice(columnOrder.indexOf(targetColumnId), 0, columnOrder.splice(columnOrder.indexOf(draggedColumnId), 1)[0]);
@@ -177,11 +107,13 @@ function $e08f3ccbd063a785$export$2e2bcd8739ae039({ header: header , table: tabl
         item: ()=>column,
         type: "column"
     });
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("th", {
+    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
         ref: dropRef,
         colSpan: header.colSpan,
         style: {
-            opacity: isDragging ? 0.5 : 1
+            opacity: isDragging ? 0.5 : 1,
+            display: "flex",
+            justifyContent: "center"
         },
         children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
             ref: previewRef,
@@ -189,39 +121,45 @@ function $e08f3ccbd063a785$export$2e2bcd8739ae039({ header: header , table: tabl
                 className: "btn-group btn-group-outline",
                 children: [
                     header.column.getIsPinned() !== "left" ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
-                        className: "btn btn-primary btn-xs",
-                        onClick: ()=>{
+                        className: "btn btn-link btn-primary btn-xs",
+                        onClick: (e)=>{
+                            e.stopPropagation();
                             header.column.pin("left");
                         },
-                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("i", {
-                            className: "fa fa-chevron-circle-left",
+                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                            className: "glyphicon glyphicon-chevron-left",
                             "aria-hidden": "true"
                         })
                     }) : null,
                     header.column.getIsPinned() ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
-                        className: "btn btn-danger btn-xs",
-                        onClick: ()=>{
+                        className: "btn btn-link btn-danger btn-xs",
+                        onClick: (e)=>{
+                            e.stopPropagation();
                             header.column.pin(false);
                         },
-                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("i", {
-                            className: "fa fa-times-circle",
+                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                            className: "glyphicon glyphicon-remove-sign",
                             "aria-hidden": "true"
                         })
                     }) : /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
-                        className: "btn btn-primary btn-xs",
+                        className: "btn btn-link btn-primary btn-xs",
+                        onClick: (e)=>{
+                            e.stopPropagation();
+                        },
                         ref: dragRef,
-                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("i", {
-                            className: "fa fa-bars",
+                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                            className: "glyphicon glyphicon-align-justify",
                             "aria-hidden": "true"
                         })
                     }),
                     header.column.getIsPinned() !== "right" ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
-                        className: "btn btn-primary btn-xs",
-                        onClick: ()=>{
+                        className: "btn btn-link btn-primary btn-xs",
+                        onClick: (e)=>{
+                            e.stopPropagation();
                             header.column.pin("right");
                         },
-                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("i", {
-                            className: "fa fa-chevron-circle-right",
+                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                            className: "glyphicon glyphicon-chevron-right",
                             "aria-hidden": "true"
                         })
                     }) : null
@@ -232,21 +170,61 @@ function $e08f3ccbd063a785$export$2e2bcd8739ae039({ header: header , table: tabl
 }
 
 
+
+function $09b54aa5e2e7fc75$var$HeaderCell({ table: table , header: header  }) {
+    const className = `${header.column.getIsSorted()} sortable`;
+    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("th", {
+        colSpan: header.colSpan,
+        className: header.column.getCanSort() ? className : undefined,
+        style: {
+            width: header.getSize(),
+            maxWidth: header.getSize(),
+            wordWrap: "break-word",
+            position: "relative"
+        },
+        onClick: header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined,
+        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("div", {
+            style: {
+                display: "flex",
+                width: "100%",
+                justifyContent: "center",
+                alignItems: "center"
+            },
+            children: [
+                /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("div", {
+                    style: {
+                        display: "inline-block"
+                    },
+                    children: [
+                        header.isPlaceholder ? null : (0, $gXNCa$tanstackreacttable.flexRender)(header.column.columnDef.header, header.getContext()),
+                        /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $e08f3ccbd063a785$export$2e2bcd8739ae039), {
+                            table: table,
+                            header: header
+                        }, `${header.id}_headerTools`)
+                    ]
+                }),
+                /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+                    onClick: (e)=>e.stopPropagation(),
+                    onMouseDown: header.getResizeHandler(),
+                    onTouchStart: header.getResizeHandler(),
+                    className: `resizer ${header.column.getIsResizing() ? "isResizing" : ""}`
+                })
+            ]
+        })
+    });
+}
+$09b54aa5e2e7fc75$var$HeaderCell.propTypes = {
+    header: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
+};
+var $09b54aa5e2e7fc75$export$2e2bcd8739ae039 = $09b54aa5e2e7fc75$var$HeaderCell;
+
+
 function $8f40fd94b98e2faf$var$HeaderRow({ headerGroup: headerGroup , table: table  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)((0, $gXNCa$reactjsxruntime.Fragment), {
-        children: [
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tr", {
-                children: headerGroup.headers.map((header)=>/*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $09b54aa5e2e7fc75$export$2e2bcd8739ae039), {
-                        header: header
-                    }, `${header.id}_headerCell`))
-            }),
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tr", {
-                children: headerGroup.headers.map((header)=>/*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $e08f3ccbd063a785$export$2e2bcd8739ae039), {
-                        table: table,
-                        header: header
-                    }, `${header.id}_headerTools`))
-            })
-        ]
+    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tr", {
+        children: headerGroup.headers.map((header)=>/*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $09b54aa5e2e7fc75$export$2e2bcd8739ae039), {
+                table: table,
+                header: header
+            }, `${header.id}_headerCell`))
     });
 }
 $8f40fd94b98e2faf$var$HeaderRow.propTypes = {
@@ -339,11 +317,11 @@ function $e4b55be42d42b24f$var$GroupedHeader({ header: header , table: table  })
                     style: {
                         cursor: "pointer"
                     },
-                    children: header.column.getIsGrouped() ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("i", {
-                        className: "fa fa-fw fa-ban",
+                    children: header.column.getIsGrouped() ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                        className: "glyphicon glyphicon-remove-sign",
                         "aria-hidden": "true"
-                    }) : /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("i", {
-                        className: "fa fa-fw fa-object-group",
+                    }) : /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                        className: "glyphicon glyphicon-duplicate",
                         "aria-hidden": "true"
                     })
                 })
@@ -415,7 +393,7 @@ var $5c8c3a5ac16dccd8$export$2e2bcd8739ae039 = $5c8c3a5ac16dccd8$var$FilteredHea
 
 
 function $fc691d32f71c7289$var$HeaderGroup({ headerGroup: headerGroup , table: table  }) {
-    return headerGroup.id !== "0" ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)((0, $gXNCa$reactjsxruntime.Fragment), {
+    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)((0, $gXNCa$reactjsxruntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $8f40fd94b98e2faf$export$2e2bcd8739ae039), {
                 headerGroup: headerGroup,
@@ -426,7 +404,7 @@ function $fc691d32f71c7289$var$HeaderGroup({ headerGroup: headerGroup , table: t
                 table: table
             })
         ]
-    }) : null;
+    });
 }
 $fc691d32f71c7289$var$HeaderGroup.propTypes = {
     headerGroup: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
@@ -535,9 +513,7 @@ function $55ada0eb9df9d5ef$var$Table({ table: table  }) {
         children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("table", {
             className: "table table-condensed table-bordered",
             style: {
-                minWidth: "100%",
-                width: table.getCenterTotalSize(),
-                tableLayout: "fixed"
+                width: table.getCenterTotalSize()
             },
             children: [
                 /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $56285dbff689bb79$export$2e2bcd8739ae039), {
@@ -561,8 +537,7 @@ function $897ab80ac9cafe91$var$DataTableView({ viewRef: viewRef , loading: loadi
         ref: viewRef,
         style: {
             overflowX: loading ? "hidden" : "auto",
-            position: "relative",
-            minHeight: "500px"
+            position: "relative"
         },
         children: [
             /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $13ef7f0473e481e2$export$2e2bcd8739ae039), {
@@ -715,57 +690,60 @@ var $db66f56970dc2999$export$2e2bcd8739ae039 = $db66f56970dc2999$var$PageSizeSel
 
 function $00fb4e70fc0faafb$var$DataFooter({ table: table , loading: loading , requestedPage: requestedPage , setRequestedPage: setRequestedPage  }) {
     return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-        className: "row",
+        className: "well well-sm",
         children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-            className: "col col-xs-12",
-            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("div", {
-                style: {
-                    display: "flex",
-                    gap: ".5em",
-                    justifyContent: "space-evenly"
-                },
-                children: [
-                    /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-                        style: {
-                            display: "contents"
-                        },
-                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $b0e17dedfdca18cb$export$2e2bcd8739ae039), {
-                            table: table,
-                            loading: loading
+            className: "row",
+            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+                className: "col col-xs-12",
+                children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("div", {
+                    style: {
+                        display: "flex",
+                        gap: ".5em",
+                        justifyContent: "space-evenly"
+                    },
+                    children: [
+                        /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+                            style: {
+                                display: "contents"
+                            },
+                            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $b0e17dedfdca18cb$export$2e2bcd8739ae039), {
+                                table: table,
+                                loading: loading
+                            })
+                        }),
+                        /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+                            style: {
+                                minWidth: "200px",
+                                display: "flex",
+                                justifyContent: "center"
+                            },
+                            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $e43006d4478e83c8$export$2e2bcd8739ae039), {
+                                table: table,
+                                requestedPage: requestedPage,
+                                setRequestedPage: setRequestedPage
+                            })
+                        }),
+                        /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+                            style: {
+                                minWidth: "200px",
+                                display: "flex",
+                                justifyContent: "center"
+                            },
+                            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $db66f56970dc2999$export$2e2bcd8739ae039), {
+                                table: table
+                            })
+                        }),
+                        /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+                            style: {
+                                display: "contents"
+                            },
+                            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $7a56fabb9a6fd445$export$2e2bcd8739ae039), {
+                                table: table,
+                                loading: loading
+                            })
                         })
-                    }),
-                    /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-                        style: {
-                            minWidth: "200px",
-                            display: "flex",
-                            justifyContent: "center"
-                        },
-                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $e43006d4478e83c8$export$2e2bcd8739ae039), {
-                            table: table,
-                            requestedPage: requestedPage,
-                            setRequestedPage: setRequestedPage
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-                        style: {
-                            minWidth: "200px",
-                            display: "flex",
-                            justifyContent: "center"
-                        },
-                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $db66f56970dc2999$export$2e2bcd8739ae039), {
-                            table: table
-                        })
-                    }),
-                    /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-                        style: {
-                            display: "contents"
-                        },
-                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $7a56fabb9a6fd445$export$2e2bcd8739ae039), {
-                            table: table,
-                            loading: loading
-                        })
-                    })
-                ]
+                    ]
+                })
             })
         })
     });
@@ -790,10 +768,12 @@ function $c1dc35055a36ee94$var$GroupingButton({ row: row  }) {
         style: {
             cursor: "pointer"
         },
-        children: row.getIsExpanded() ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("i", {
-            className: "fa fa-fw fa-object-ungroup"
-        }) : /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("i", {
-            className: "fa fa-fw fa-object-group"
+        children: row.getIsExpanded() ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+            className: "glyphicon glyphicon-remove-sign",
+            "aria-hidden": "true"
+        }) : /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+            className: "glyphicon glyphicon-duplicate",
+            "aria-hidden": "true"
         })
     });
 }
@@ -841,33 +821,21 @@ const $125a85f138d8a4a2$export$95551f3ba34233a8 = (row, columnId, value)=>{
 };
 
 
+
 function $4fa36e821943b400$var$BootstrapTable({ table: table , loading: loading , loadingOffset: loadingOffset , requestedPage: requestedPage , setRequestedPage: setRequestedPage , viewRef: viewRef  }) {
-    return table ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("div", {
-        className: "panel panel-default panel-table",
+    return table ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)((0, $gXNCa$reactjsxruntime.Fragment), {
         children: [
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-                className: "panel-heading",
-                children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $700784874ae6a088$export$2e2bcd8739ae039), {
-                    table: table
-                })
+            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $897ab80ac9cafe91$export$2e2bcd8739ae039), {
+                table: table,
+                loading: loading,
+                loadingOffset: loadingOffset,
+                viewRef: viewRef
             }),
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-                className: "panel-body",
-                children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $897ab80ac9cafe91$export$2e2bcd8739ae039), {
-                    table: table,
-                    loading: loading,
-                    loadingOffset: loadingOffset,
-                    viewRef: viewRef
-                })
-            }),
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-                className: "panel-footer",
-                children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $00fb4e70fc0faafb$export$2e2bcd8739ae039), {
-                    table: table,
-                    requestedPage: requestedPage,
-                    setRequestedPage: setRequestedPage,
-                    loading: loading
-                })
+            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $00fb4e70fc0faafb$export$2e2bcd8739ae039), {
+                table: table,
+                requestedPage: requestedPage,
+                setRequestedPage: setRequestedPage,
+                loading: loading
             })
         ]
     }) : null;

@@ -1,18 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import classNames from 'classnames'
 
 function LoadingScreen({loading, loadingOffset}) {
     if (!loading) {
         return null
     }
 
+    const className = `loading ${loading ? 'progress' : ''}`
+
     return (
         <div
-            className={classNames({
-                loading: true,
-                progress: loading,
-            })}
+            className={className}
             style={{left: loadingOffset}}
         >
             <span>

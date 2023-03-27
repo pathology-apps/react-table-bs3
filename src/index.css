@@ -1,57 +1,20 @@
-table,
 .table {
-    border: 1px solid lightgray;
-    width: fit-content;
-    max-width: max-content;
+    table-layout: fixed;
+  }
+  
+.table thead th {
+    position: relative;
 }
 
-.tr {
-    display: flex;
-}
-
-tr,
-.tr {
-    width: fit-content;
-    height: 30px;
-}
-
-th,
-.th,
-td,
-.td {
-    padding: 0.25rem;
-}
-
-th,
-.th {
-    padding: 2px 4px;
-    font-weight: bold;
-    text-align: center;
-    height: 30px;
-    width: 100px;
-    white-space: nowrap;
-}
-
-td,
-.td {
-    height: 30px;
-    max-width: 100px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-.resizer {
+.table thead th .resizer {
     position: absolute;
-    right: 0;
     top: 0;
-    height: 100%;
-    width: 40px;
-    padding: 5px;
-    background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .2) 100%);
+    right: -5px;
+    bottom: 0;
+    width: 5px;
     cursor: col-resize;
-    user-select: none;
-    touch-action: none;
+    z-index: 1;
+    background-color: transparent;
 }
 
 .resizer.isResizing {

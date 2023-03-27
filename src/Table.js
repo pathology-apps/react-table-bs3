@@ -9,12 +9,10 @@ function Table({table}) {
     return (
         <DndProvider backend={HTML5Backend}>
             <table
-                className="table table-condensed table-bordered"
                 {...{
+                    className: "table table-condensed table-bordered",
                     style: {
-                        minWidth: '100%',
                         width: table.getCenterTotalSize(),
-                        tableLayout: 'fixed',
                     },
                 }}
             >

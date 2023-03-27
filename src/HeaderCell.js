@@ -1,20 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import HeaderTools from './HeaderTools'
-import classNames from 'classnames'
 import {flexRender} from '@tanstack/react-table'
 
 function HeaderCell({table, header}) {
+
+    const className = `${header.column.getIsSorted()} sortable`
+
     return (
         <th
             {...{
                 colSpan: header.colSpan,
                 className: header.column.getCanSort()
-                    ? classNames({
-                          asc: header.column.getIsSorted() === 'asc',
-                          desc: header.column.getIsSorted() === 'desc',
-                          sortable: true,
-                      })
+                    ? className
                     : undefined,
                 style: {
                     width: header.getSize(),

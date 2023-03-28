@@ -1,5 +1,6 @@
 import React from 'react'
 import {useDrag, useDrop} from 'react-dnd'
+import Unpin from './Unpin'
 
 const reorderColumn = (
   draggedColumnId,
@@ -17,6 +18,7 @@ const reorderColumn = (
 export default function HeaderTools({
     header,
     table,
+    children,
 }) {
     const { getState, setColumnOrder } = table
     const { columnOrder } = getState()
@@ -43,60 +45,48 @@ export default function HeaderTools({
     })
 
     return (
-        <div 
-            ref={dropRef}
-            colSpan={header.colSpan}
-            style={{ opacity: isDragging ? 0.5 : 1, display: 'flex', justifyContent: 'center' }}
-            key={`${header.id}_headerCellPin`}
-        >
-            <div ref={previewRef}>
-                {!header.isPlaceholder && header.column.getCanPin() && (
-                    <div className="btn-group btn-group-outline">
-                        {header.column.getIsPinned() !== 'left' ? (
-                            <button
-                                className="btn btn-link btn-primary btn-xs"
-                                onClick={(e) => {
-                                    e.stopPropagation()
-                                    header.column.pin('left')
-                                }}
-                            >
-                                <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                            </button>
-                        ) : null}
-                        {header.column.getIsPinned() ? (
-                            <button
-                                className="btn btn-link btn-danger btn-xs"
-                                onClick={(e) => {
-                                    e.stopPropagation()
-                                    header.column.pin(false)
-                                }}
-                            >
-                                <span className="glyphicon glyphicon-remove-sign" aria-hidden="true"></span>
-                            </button>
-                        ) : (
-                            <button 
-                                className="btn btn-link btn-primary btn-xs" 
-                                onClick={(e) => {
-                                    e.stopPropagation()
-                                }} 
-                                ref={dragRef}
-                            >
-                                <span className="glyphicon glyphicon-align-justify" aria-hidden="true"></span>
-                            </button>
-                        )}
-                        {header.column.getIsPinned() !== 'right' ? (
-                            <button
-                                className="btn btn-link btn-primary btn-xs"
-                                onClick={(e) => {
-                                    e.stopPropagation()
-                                    header.column.pin('right')
-                                }}
-                            >
-                                <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                            </button>
-                        ) : null}
-                    </div>
-                )}
+        <div ref={dragRef}>
+            <div 
+                ref={dropRef}
+                colSpan={header.colSpan}
+                style={{ opacity: isDragging ? 0.5 : 1, width: '100%' }}
+                key={`${header.id}_headerCellPin`}
+            >
+                <div style={{ display: 'flex', justifyContent: 'space-between', overflow: 'hidden' }} ref={previewRef}>
+                    {!header.isPlaceholder && header.column.getCanPin() && (
+                        <>
+                            {header.column.getIsPinned() !== 'left' ? (
+                                <button
+                                    className="btn btn-link btn-xs"
+                                    style={{
+                                        color: '#ddd',
+                                    }}
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        header.column.pin('left')
+                                    }}
+                                >
+                                    <span className="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                                </button>
+                            ) : <Unpin header={header} />}
+                            {children}
+                            {header.column.getIsPinned() !== 'right' ? (
+                                <button
+                                    className="btn btn-link btn-xs"
+                                    style={{
+                                        color: '#ddd',
+                                    }}
+                                    onClick={(e) => {
+                                        e.stopPropagation()
+                                        header.column.pin('right')
+                                    }}
+                                >
+                                    <span className="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                                </button>
+                            ) : <Unpin header={header} />}
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     )

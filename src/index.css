@@ -1,15 +1,39 @@
-.table {
+.react-table-bs3 {
     table-layout: fixed;
-  }
-  
-.table thead th {
-    position: relative;
+    width: 100%;
 }
 
-.table thead th .resizer {
+.react-table-bs3 tr {
+    width: fit-content;
+}
+
+.react-table-bs3 > thead > th,
+.react-table-bs3 > tbody > td {
+    border-collapse: collapse;
+    padding: 0.25rem;
+}
+
+.react-table-bs3 > thead > th {
+    border-collapse: collapse;
+    padding: 2px 4px;
+    font-weight: bold;
+    text-align: center;
+    height: 30px;
+    width: 100px;
+    white-space: nowrap;
+}
+
+.react-table-bs3 td {
+    height: 30px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.resizer {
     position: absolute;
     top: 0;
-    right: -5px;
+    right: 0; /* Set right to 0 to position the resizing handle inside the table */
     bottom: 0;
     width: 5px;
     cursor: col-resize;

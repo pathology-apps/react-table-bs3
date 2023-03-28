@@ -10,10 +10,7 @@ function Table({table}) {
         <DndProvider backend={HTML5Backend}>
             <table
                 {...{
-                    className: "table table-condensed table-bordered",
-                    style: {
-                        width: table.getCenterTotalSize(),
-                    },
+                    className: "react-table-bs3 table table-condensed table-bordered",
                 }}
             >
                 <TableHead table={table} />

@@ -25,38 +25,24 @@ function HeaderCell({table, header}) {
                     : undefined,
             }}
         >
+            <HeaderTools key={`${header.id}_headerTools`} table={table} header={header}>
+                {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                            header.column.columnDef.header,
+                            header.getContext(),
+                        )}
+            </HeaderTools>
             <div
-                style={{
-                    display: 'flex',
-                    width: '100%',
-                    justifyContent: 'center',
-                    alignItems: 'center',
+                {...{
+                    onClick: (e) => e.stopPropagation(),
+                    onMouseDown: header.getResizeHandler(),
+                    onTouchStart: header.getResizeHandler(),
+                    className: `resizer ${
+                        header.column.getIsResizing() ? 'isResizing' : ''
+                    }`,
                 }}
-            >
-                <div
-                    style={{
-                        display: 'inline-block',
-                    }}
-                >
-                    {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                              header.column.columnDef.header,
-                              header.getContext(),
-                          )}
-                    <HeaderTools key={`${header.id}_headerTools`} table={table} header={header} />
-                </div>
-                <div
-                    {...{
-                        onClick: (e) => e.stopPropagation(),
-                        onMouseDown: header.getResizeHandler(),
-                        onTouchStart: header.getResizeHandler(),
-                        className: `resizer ${
-                            header.column.getIsResizing() ? 'isResizing' : ''
-                        }`,
-                    }}
-                />
-            </div>
+            />
         </th>
     )
 }

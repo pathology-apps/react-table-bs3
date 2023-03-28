@@ -83,13 +83,33 @@ var $13ef7f0473e481e2$export$2e2bcd8739ae039 = $13ef7f0473e481e2$var$LoadingScre
 
 
 
+
+
+function $2f255ee1acdf2141$export$2e2bcd8739ae039({ header: header  }) {
+    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
+        className: "btn btn-link btn-xs",
+        onClick: (e)=>{
+            e.stopPropagation();
+            header.column.pin(false);
+        },
+        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+            style: {
+                color: "#337ab7"
+            },
+            className: "glyphicon glyphicon-pushpin",
+            "aria-hidden": "true"
+        })
+    });
+}
+
+
 const $e08f3ccbd063a785$var$reorderColumn = (draggedColumnId, targetColumnId, columnOrder)=>{
     columnOrder.splice(columnOrder.indexOf(targetColumnId), 0, columnOrder.splice(columnOrder.indexOf(draggedColumnId), 1)[0]);
     return [
         ...columnOrder
     ];
 };
-function $e08f3ccbd063a785$export$2e2bcd8739ae039({ header: header , table: table  }) {
+function $e08f3ccbd063a785$export$2e2bcd8739ae039({ header: header , table: table , children: children  }) {
     const { getState: getState , setColumnOrder: setColumnOrder  } = table;
     const { columnOrder: columnOrder  } = getState();
     const { column: column  } = header;
@@ -108,72 +128,68 @@ function $e08f3ccbd063a785$export$2e2bcd8739ae039({ header: header , table: tabl
         type: "column"
     });
     return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-        ref: dropRef,
-        colSpan: header.colSpan,
-        style: {
-            opacity: isDragging ? 0.5 : 1,
-            display: "flex",
-            justifyContent: "center"
-        },
+        ref: dragRef,
         children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-            ref: previewRef,
-            children: !header.isPlaceholder && header.column.getCanPin() && /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("div", {
-                className: "btn-group btn-group-outline",
-                children: [
-                    header.column.getIsPinned() !== "left" ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
-                        className: "btn btn-link btn-primary btn-xs",
-                        onClick: (e)=>{
-                            e.stopPropagation();
-                            header.column.pin("left");
-                        },
-                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
-                            className: "glyphicon glyphicon-chevron-left",
-                            "aria-hidden": "true"
+            ref: dropRef,
+            colSpan: header.colSpan,
+            style: {
+                opacity: isDragging ? 0.5 : 1,
+                width: "100%"
+            },
+            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+                style: {
+                    display: "flex",
+                    justifyContent: "space-between",
+                    overflow: "hidden"
+                },
+                ref: previewRef,
+                children: !header.isPlaceholder && header.column.getCanPin() && /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)((0, $gXNCa$reactjsxruntime.Fragment), {
+                    children: [
+                        header.column.getIsPinned() !== "left" ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
+                            className: "btn btn-link btn-xs",
+                            style: {
+                                color: "#ddd"
+                            },
+                            onClick: (e)=>{
+                                e.stopPropagation();
+                                header.column.pin("left");
+                            },
+                            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                                className: "glyphicon glyphicon-chevron-left",
+                                "aria-hidden": "true"
+                            })
+                        }) : /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $2f255ee1acdf2141$export$2e2bcd8739ae039), {
+                            header: header
+                        }),
+                        children,
+                        header.column.getIsPinned() !== "right" ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
+                            className: "btn btn-link btn-xs",
+                            style: {
+                                color: "#ddd"
+                            },
+                            onClick: (e)=>{
+                                e.stopPropagation();
+                                header.column.pin("right");
+                            },
+                            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                                className: "glyphicon glyphicon-chevron-right",
+                                "aria-hidden": "true"
+                            })
+                        }) : /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $2f255ee1acdf2141$export$2e2bcd8739ae039), {
+                            header: header
                         })
-                    }) : null,
-                    header.column.getIsPinned() ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
-                        className: "btn btn-link btn-danger btn-xs",
-                        onClick: (e)=>{
-                            e.stopPropagation();
-                            header.column.pin(false);
-                        },
-                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
-                            className: "glyphicon glyphicon-remove-sign",
-                            "aria-hidden": "true"
-                        })
-                    }) : /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
-                        className: "btn btn-link btn-primary btn-xs",
-                        onClick: (e)=>{
-                            e.stopPropagation();
-                        },
-                        ref: dragRef,
-                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
-                            className: "glyphicon glyphicon-align-justify",
-                            "aria-hidden": "true"
-                        })
-                    }),
-                    header.column.getIsPinned() !== "right" ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
-                        className: "btn btn-link btn-primary btn-xs",
-                        onClick: (e)=>{
-                            e.stopPropagation();
-                            header.column.pin("right");
-                        },
-                        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
-                            className: "glyphicon glyphicon-chevron-right",
-                            "aria-hidden": "true"
-                        })
-                    }) : null
-                ]
+                    ]
+                })
             })
-        })
-    }, `${header.id}_headerCellPin`);
+        }, `${header.id}_headerCellPin`)
+    });
 }
 
 
 
 function $09b54aa5e2e7fc75$var$HeaderCell({ table: table , header: header  }) {
     const className = `${header.column.getIsSorted()} sortable`;
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("th", {
+    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("th", {
         colSpan: header.colSpan,
         className: header.column.getCanSort() ? className : undefined,
         style: {
@@ -183,34 +199,19 @@ function $09b54aa5e2e7fc75$var$HeaderCell({ table: table , header: header  }) {
             position: "relative"
         },
         onClick: header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined,
-        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("div", {
-            style: {
-                display: "flex",
-                width: "100%",
-                justifyContent: "center",
-                alignItems: "center"
-            },
-            children: [
-                /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("div", {
-                    style: {
-                        display: "inline-block"
-                    },
-                    children: [
-                        header.isPlaceholder ? null : (0, $gXNCa$tanstackreacttable.flexRender)(header.column.columnDef.header, header.getContext()),
-                        /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $e08f3ccbd063a785$export$2e2bcd8739ae039), {
-                            table: table,
-                            header: header
-                        }, `${header.id}_headerTools`)
-                    ]
-                }),
-                /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
-                    onClick: (e)=>e.stopPropagation(),
-                    onMouseDown: header.getResizeHandler(),
-                    onTouchStart: header.getResizeHandler(),
-                    className: `resizer ${header.column.getIsResizing() ? "isResizing" : ""}`
-                })
-            ]
-        })
+        children: [
+            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $e08f3ccbd063a785$export$2e2bcd8739ae039), {
+                table: table,
+                header: header,
+                children: header.isPlaceholder ? null : (0, $gXNCa$tanstackreacttable.flexRender)(header.column.columnDef.header, header.getContext())
+            }, `${header.id}_headerTools`),
+            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+                onClick: (e)=>e.stopPropagation(),
+                onMouseDown: header.getResizeHandler(),
+                onTouchStart: header.getResizeHandler(),
+                className: `resizer ${header.column.getIsResizing() ? "isResizing" : ""}`
+            })
+        ]
     });
 }
 $09b54aa5e2e7fc75$var$HeaderCell.propTypes = {
@@ -511,10 +512,7 @@ function $55ada0eb9df9d5ef$var$Table({ table: table  }) {
     return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $gXNCa$reactdnd.DndProvider), {
         backend: (0, $gXNCa$reactdndhtml5backend.HTML5Backend),
         children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("table", {
-            className: "table table-condensed table-bordered",
-            style: {
-                width: table.getCenterTotalSize()
-            },
+            className: "react-table-bs3 table table-condensed table-bordered",
             children: [
                 /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $56285dbff689bb79$export$2e2bcd8739ae039), {
                     table: table

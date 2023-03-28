@@ -2,7 +2,7 @@
   "name": "@pathappdev/react-table-bs3",
   "description": "Bootstrap 3 layout for @tanstack/react-table",
   "url": "github:pathology-apps/react-table-bs3",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "source": "src/index.js",
   "main": "dist/main.js",
   "scripts": {

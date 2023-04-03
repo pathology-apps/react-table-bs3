@@ -7,48 +7,50 @@ import GroupingButton from './GroupingButton'
 import './index.css'
 
 function BootstrapTable({
+    cellProps = () => {},
     loading,
     loadingOffset,
     requestedPage,
-    rowProps,
+    rowProps = () => {},
     setRequestedPage,
     table,
-    tableProps,
+    tableProps = () => {},
     viewRef,
 }) {
     return table ? (
         <>
             <DataTableView
-                table={table}
+                cellProps={cellProps}
                 loading={loading}
                 loadingOffset={loadingOffset}
-                viewRef={viewRef}
                 rowProps={rowProps}
+                table={table}
                 tableProps={tableProps}
+                viewRef={viewRef}
             />
             <DataFooter
-                table={table}
+                loading={loading}
                 requestedPage={requestedPage}
                 setRequestedPage={setRequestedPage}
-                loading={loading}
+                table={table}
             />
         </>
     ) : null
 }
 
 BootstrapTable.propTypes = {
-    table: PropTypes.object.isRequired,
     loading: PropTypes.bool,
     loadingOffset: PropTypes.number,
     requestedPage: PropTypes.number,
     setRequestedPage: PropTypes.func,
+    table: PropTypes.object.isRequired,
     viewRef: PropTypes.object,
 }
 
 export default BootstrapTable
 
 export { 
+    GroupingButton,
     tableFilter,
     valueFilter,
-    GroupingButton,
 }

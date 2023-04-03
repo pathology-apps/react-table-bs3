@@ -6,6 +6,7 @@ import TableBody from './TableBody'
 import TableHead from './TableHead'
 
 function Table({
+    cellProps,
     rowProps, 
     table, 
     tableProps,
@@ -19,7 +20,7 @@ function Table({
                 }}
             >
                 <TableHead table={table} />
-                <TableBody table={table} rowProps={rowProps} />
+                <TableBody table={table} cellProps={cellProps} rowProps={rowProps} />
             </table>
         </DndProvider>
     )

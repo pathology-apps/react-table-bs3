@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import TableRow from './TableRow'
 
 function TableBody({
+    cellProps,
     rowProps,
     table, 
 }) {
@@ -14,7 +15,12 @@ function TableBody({
     return (
         <tbody>
             {table.getRowModel().rows.map((row) => (
-                <TableRow key={`${row.id}_tableRow`} row={row} rowProps={rowProps} />
+                <TableRow 
+                    key={`${row.id}_tableRow`} 
+                    cellProps={cellProps} 
+                    row={row} 
+                    rowProps={rowProps} 
+                />
             ))}
         </tbody>
     )

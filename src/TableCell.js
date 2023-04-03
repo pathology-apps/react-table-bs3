@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import {flexRender} from '@tanstack/react-table'
 
 function TableCell({
-    cell, 
+    cell,
+    cellProps,
     row,
 }) {
     // For cells with repeated values, render null
@@ -45,8 +46,8 @@ function TableCell({
                     maxWidth: cell.column.getSize(),
                     wordWrap: 'break-word',
                     color: '#444',
-                    background: cell.row.index % 2 === 0 ? '#fff' : '#f9f9f9',
                 },
+                ...cellProps(cell, row),
             }}
         >
             {cellRender}

@@ -4,6 +4,7 @@ import LoadingScreen from './LoadingScreen'
 import Table from './Table'
 
 function DataTableView({
+    cellProps,
     loading, 
     loadingOffset, 
     rowProps,
@@ -20,7 +21,12 @@ function DataTableView({
             }}
         >
             <LoadingScreen loading={loading} loadingOffset={loadingOffset} />
-            <Table table={table} rowProps={rowProps} tableProps={tableProps} />
+            <Table 
+                cellProps={cellProps}
+                rowProps={rowProps} 
+                table={table} 
+                tableProps={tableProps} 
+            />
         </div>
     )
 }

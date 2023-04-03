@@ -316,7 +316,7 @@ var $13ef7f0473e481e2$export$2e2bcd8739ae039 = $13ef7f0473e481e2$var$LoadingScre
 
 
 
-function $e351aac700bc7968$var$TableCell({ cell: cell , row: row  }) {
+function $e351aac700bc7968$var$TableCell({ cell: cell , cellProps: cellProps , row: row  }) {
     // For cells with repeated values, render null
     // Otherwise, just render the regular cell
     let cellRender = (0, $gXNCa$tanstackreacttable.flexRender)(cell.column.columnDef.cell, cell.getContext());
@@ -342,9 +342,9 @@ function $e351aac700bc7968$var$TableCell({ cell: cell , row: row  }) {
             width: cell.column.getSize(),
             maxWidth: cell.column.getSize(),
             wordWrap: "break-word",
-            color: "#444",
-            background: cell.row.index % 2 === 0 ? "#fff" : "#f9f9f9"
+            color: "#444"
         },
+        ...cellProps(cell, row),
         children: cellRender
     });
 }
@@ -355,11 +355,12 @@ $e351aac700bc7968$var$TableCell.propTypes = {
 var $e351aac700bc7968$export$2e2bcd8739ae039 = $e351aac700bc7968$var$TableCell;
 
 
-function $cc4764bcb2dbe5fa$var$TableRow({ row: row , rowProps: rowProps  }) {
+function $cc4764bcb2dbe5fa$var$TableRow({ cellProps: cellProps , row: row , rowProps: rowProps  }) {
     return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tr", {
         ...rowProps(row),
         children: row.getVisibleCells().map((cell)=>/*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $e351aac700bc7968$export$2e2bcd8739ae039), {
                 cell: cell,
+                cellProps: cellProps,
                 row: row
             }, `${cell.id}_tableCell`))
     });
@@ -370,11 +371,12 @@ $cc4764bcb2dbe5fa$var$TableRow.propTypes = {
 var $cc4764bcb2dbe5fa$export$2e2bcd8739ae039 = $cc4764bcb2dbe5fa$var$TableRow;
 
 
-function $189fb20378fd77c6$var$TableBody({ rowProps: rowProps , table: table  }) {
+function $189fb20378fd77c6$var$TableBody({ cellProps: cellProps , rowProps: rowProps , table: table  }) {
     const rowModel = table.getRowModel();
     if (!rowModel?.rows?.length) return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tbody", {});
     return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tbody", {
         children: table.getRowModel().rows.map((row)=>/*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $cc4764bcb2dbe5fa$export$2e2bcd8739ae039), {
+                cellProps: cellProps,
                 row: row,
                 rowProps: rowProps
             }, `${row.id}_tableRow`))
@@ -746,7 +748,7 @@ $56285dbff689bb79$var$TableHead.propTypes = {
 var $56285dbff689bb79$export$2e2bcd8739ae039 = $56285dbff689bb79$var$TableHead;
 
 
-function $55ada0eb9df9d5ef$var$Table({ rowProps: rowProps , table: table , tableProps: tableProps  }) {
+function $55ada0eb9df9d5ef$var$Table({ cellProps: cellProps , rowProps: rowProps , table: table , tableProps: tableProps  }) {
     return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $gXNCa$reactdnd.DndProvider), {
         backend: (0, $gXNCa$reactdndhtml5backend.HTML5Backend),
         children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("table", {
@@ -758,6 +760,7 @@ function $55ada0eb9df9d5ef$var$Table({ rowProps: rowProps , table: table , table
                 }),
                 /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $189fb20378fd77c6$export$2e2bcd8739ae039), {
                     table: table,
+                    cellProps: cellProps,
                     rowProps: rowProps
                 })
             ]
@@ -770,7 +773,7 @@ $55ada0eb9df9d5ef$var$Table.propTypes = {
 var $55ada0eb9df9d5ef$export$2e2bcd8739ae039 = $55ada0eb9df9d5ef$var$Table;
 
 
-function $897ab80ac9cafe91$var$DataTableView({ loading: loading , loadingOffset: loadingOffset , rowProps: rowProps , table: table , tableProps: tableProps , viewRef: viewRef  }) {
+function $897ab80ac9cafe91$var$DataTableView({ cellProps: cellProps , loading: loading , loadingOffset: loadingOffset , rowProps: rowProps , table: table , tableProps: tableProps , viewRef: viewRef  }) {
     return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("div", {
         ref: viewRef,
         style: {
@@ -783,8 +786,9 @@ function $897ab80ac9cafe91$var$DataTableView({ loading: loading , loadingOffset:
                 loadingOffset: loadingOffset
             }),
             /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $55ada0eb9df9d5ef$export$2e2bcd8739ae039), {
-                table: table,
+                cellProps: cellProps,
                 rowProps: rowProps,
+                table: table,
                 tableProps: tableProps
             })
         ]

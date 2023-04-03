@@ -1,7 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function LoadingScreen({loading, loadingOffset}) {
+function LoadingScreen({
+    loading, 
+    loadingOffset,
+}) {
     if (!loading) {
         return null
     }

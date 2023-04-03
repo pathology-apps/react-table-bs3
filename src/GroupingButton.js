@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function GroupingButton({row}) {
+function GroupingButton({
+    row,
+}) {
     return (
         <button
             type="button"

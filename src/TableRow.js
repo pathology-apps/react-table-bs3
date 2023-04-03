@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TableCell from './TableCell'
 
-function TableRow({row, rowProps}) {
+function TableRow({
+    row, 
+    rowProps,
+}) {
     return (
         <tr {...rowProps(row)}>
             {row.getVisibleCells().map((cell) => (

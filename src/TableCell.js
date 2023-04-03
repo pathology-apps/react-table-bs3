@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {flexRender} from '@tanstack/react-table'
 
-function TableCell({cell, row}) {
+function TableCell({
+    cell, 
+    row,
+}) {
     // For cells with repeated values, render null
     // Otherwise, just render the regular cell
     let cellRender = flexRender(cell.column.columnDef.cell, cell.getContext())

@@ -1,9 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import HeaderTools from './HeaderTools'
 import {flexRender} from '@tanstack/react-table'
+import HeaderTools from './HeaderTools'
 
-function HeaderCell({table, header}) {
+function HeaderCell({
+    header,
+    table, 
+}) {
 
     const className = `${header.column.getIsSorted()} sortable`
 

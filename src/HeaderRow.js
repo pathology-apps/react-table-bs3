@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import HeaderCell from './HeaderCell'
 
-function HeaderRow({ headerGroup, table }) {
+function HeaderRow({ 
+    headerGroup, 
+    table,
+}) {
 
     return (
         <tr>

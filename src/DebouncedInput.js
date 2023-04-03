@@ -2,9 +2,9 @@ import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 
 function DebouncedInput({
-    value: initialValue,
-    onChange,
     debounce = 500,
+    onChange,
+    value: initialValue,
     ...props
 }) {
     const [value, setValue] = useState(initialValue)

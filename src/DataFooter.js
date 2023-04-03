@@ -1,11 +1,16 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import PreviousButton from './PreviousButton'
 import NextButton from './NextButton'
 import PageSelector from './PageSelector'
 import PageSizeSelector from './PageSizeSelector'
+import PreviousButton from './PreviousButton'
+import PropTypes from 'prop-types'
 
-function DataFooter({table, loading, requestedPage, setRequestedPage}) {
+function DataFooter({
+    loading, 
+    requestedPage, 
+    setRequestedPage,
+    table, 
+}) {
     return (
         <div className="well well-sm">
             <div className="row">

@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import HeaderGroup from './HeaderGroup'
 
-function TableHead({table}) {
+function TableHead({
+    table,
+}) {
     return (
         <thead>
             {table.getHeaderGroups().map((headerGroup) => (

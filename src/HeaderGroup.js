@@ -1,9 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import HeaderRow from './HeaderRow'
 import FilteredHeaderRow from './FilteredHeaderRow'
+import HeaderRow from './HeaderRow'
 
-function HeaderGroup({headerGroup, table}) {
+function HeaderGroup({
+    headerGroup, 
+    table,
+}) {
     return (
         <>
             <HeaderRow 

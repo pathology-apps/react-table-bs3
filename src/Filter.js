@@ -2,7 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import DebouncedInput from './DebouncedInput'
 
-function Filter({column}) {
+function Filter({
+    column,
+}) {
     const columnFilterValue = column.getFilterValue()
 
     if (!column.getCanFilter()) {

@@ -1,19 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import DataTableView from './DataTableView'
-import DataFooter from './DataFooter'
-import GroupingButton from './GroupingButton'
 import {tableFilter, valueFilter} from './Filters'
+import DataFooter from './DataFooter'
+import DataTableView from './DataTableView'
+import GroupingButton from './GroupingButton'
 import './index.css'
 
 function BootstrapTable({
-    table,
     loading,
     loadingOffset,
     requestedPage,
-    setRequestedPage,
-    viewRef,
     rowProps,
+    setRequestedPage,
+    table,
+    tableProps,
+    viewRef,
 }) {
     return table ? (
         <>
@@ -23,6 +24,7 @@ function BootstrapTable({
                 loadingOffset={loadingOffset}
                 viewRef={viewRef}
                 rowProps={rowProps}
+                tableProps={tableProps}
             />
             <DataFooter
                 table={table}

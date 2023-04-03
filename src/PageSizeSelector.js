@@ -1,7 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function PageSizeSelector({table}) {
+function PageSizeSelector({
+    table,
+}) {
     return (
         <select
             value={table.getState().pagination.pageSize}

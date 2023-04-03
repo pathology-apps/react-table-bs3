@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Filter from './Filter'
 
-function GroupedHeader({header, table}) {
+function GroupedHeader({
+    header, 
+    table,
+}) {
     return (
         <>
             <Filter column={header.column} table={table} />

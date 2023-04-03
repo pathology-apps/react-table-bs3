@@ -1,7 +1,9 @@
 
 import React from 'react'
 
-export default function Unpin({header}) {
+export default function Unpin({
+    header,
+}) {
     return (
         <button
             className="btn btn-link btn-xs"

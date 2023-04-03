@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TableRow from './TableRow'
 
-function TableBody({table, rowProps}) {
+function TableBody({
+    rowProps,
+    table, 
+}) {
     const rowModel = table.getRowModel()
     if (!rowModel?.rows?.length) {
         return <tbody />

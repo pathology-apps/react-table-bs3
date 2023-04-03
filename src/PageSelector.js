@@ -1,7 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import PropTypes from 'prop-types'
 
-function PageSelector({requestedPage, table, setRequestedPage}) {
+function PageSelector({
+    requestedPage, 
+    setRequestedPage,
+    table, 
+}) {
     // requestedPage and setRequestedPage might be undefined if the table is not paginated on the server, so we need to make local state to track the [requestedPage, setRequestedPage] state.
     const [localRequestedPage, setLocalRequestedPage] = useState(1)
 

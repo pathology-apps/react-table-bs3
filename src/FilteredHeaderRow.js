@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import FilteredHeaderCell from './FilteredHeaderCell'
 
-function FilteredHeaderRow({headerGroup, table}) {
+function FilteredHeaderRow({
+    headerGroup, 
+    table,
+}) {
     return (
         <tr key={`${headerGroup.i}_filter`}>
             {headerGroup.headers.map((header) => (

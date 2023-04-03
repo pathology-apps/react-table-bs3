@@ -1,7 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-function PreviousButton({table, loading}) {
+function PreviousButton({
+    loading,
+    table, 
+}) {
     // If loading is undefined, set it to false:
     loading = loading || false
     return (

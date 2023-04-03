@@ -2,7 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import FilteredHeader from './FilteredHeader'
 
-function FilteredHeaderCell({header, table}) {
+function FilteredHeaderCell({
+    header, 
+    table,
+}) {
     return (
         <th
             {...{

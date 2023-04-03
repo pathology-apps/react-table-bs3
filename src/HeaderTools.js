@@ -16,9 +16,9 @@ const reorderColumn = (
 }
 
 export default function HeaderTools({
+    children,
     header,
     table,
-    children,
 }) {
     const { getState, setColumnOrder } = table
     const { columnOrder } = getState()

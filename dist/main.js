@@ -477,8 +477,9 @@ $e351aac700bc7968$var$TableCell.propTypes = {
 var $e351aac700bc7968$export$2e2bcd8739ae039 = $e351aac700bc7968$var$TableCell;
 
 
-function $cc4764bcb2dbe5fa$var$TableRow({ row: row  }) {
+function $cc4764bcb2dbe5fa$var$TableRow({ row: row , rowProps: rowProps  }) {
     return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tr", {
+        ...rowProps(row),
         children: row.getVisibleCells().map((cell)=>/*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $e351aac700bc7968$export$2e2bcd8739ae039), {
                 cell: cell,
                 row: row
@@ -491,12 +492,13 @@ $cc4764bcb2dbe5fa$var$TableRow.propTypes = {
 var $cc4764bcb2dbe5fa$export$2e2bcd8739ae039 = $cc4764bcb2dbe5fa$var$TableRow;
 
 
-function $189fb20378fd77c6$var$TableBody({ table: table  }) {
+function $189fb20378fd77c6$var$TableBody({ table: table , rowProps: rowProps  }) {
     const rowModel = table.getRowModel();
     if (!rowModel?.rows?.length) return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tbody", {});
     return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tbody", {
         children: table.getRowModel().rows.map((row)=>/*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $cc4764bcb2dbe5fa$export$2e2bcd8739ae039), {
-                row: row
+                row: row,
+                rowProps: rowProps
             }, `${row.id}_tableRow`))
     });
 }
@@ -508,7 +510,7 @@ var $189fb20378fd77c6$export$2e2bcd8739ae039 = $189fb20378fd77c6$var$TableBody;
 
 
 
-function $55ada0eb9df9d5ef$var$Table({ table: table  }) {
+function $55ada0eb9df9d5ef$var$Table({ table: table , rowProps: rowProps  }) {
     return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $gXNCa$reactdnd.DndProvider), {
         backend: (0, $gXNCa$reactdndhtml5backend.HTML5Backend),
         children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("table", {
@@ -518,7 +520,8 @@ function $55ada0eb9df9d5ef$var$Table({ table: table  }) {
                     table: table
                 }),
                 /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $189fb20378fd77c6$export$2e2bcd8739ae039), {
-                    table: table
+                    table: table,
+                    rowProps: rowProps
                 })
             ]
         })
@@ -530,7 +533,7 @@ $55ada0eb9df9d5ef$var$Table.propTypes = {
 var $55ada0eb9df9d5ef$export$2e2bcd8739ae039 = $55ada0eb9df9d5ef$var$Table;
 
 
-function $897ab80ac9cafe91$var$DataTableView({ viewRef: viewRef , loading: loading , loadingOffset: loadingOffset , table: table  }) {
+function $897ab80ac9cafe91$var$DataTableView({ viewRef: viewRef , loading: loading , loadingOffset: loadingOffset , table: table , rowProps: rowProps  }) {
     return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("div", {
         ref: viewRef,
         style: {
@@ -543,7 +546,8 @@ function $897ab80ac9cafe91$var$DataTableView({ viewRef: viewRef , loading: loadi
                 loadingOffset: loadingOffset
             }),
             /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $55ada0eb9df9d5ef$export$2e2bcd8739ae039), {
-                table: table
+                table: table,
+                rowProps: rowProps
             })
         ]
     });
@@ -820,14 +824,15 @@ const $125a85f138d8a4a2$export$95551f3ba34233a8 = (row, columnId, value)=>{
 
 
 
-function $4fa36e821943b400$var$BootstrapTable({ table: table , loading: loading , loadingOffset: loadingOffset , requestedPage: requestedPage , setRequestedPage: setRequestedPage , viewRef: viewRef  }) {
+function $4fa36e821943b400$var$BootstrapTable({ table: table , loading: loading , loadingOffset: loadingOffset , requestedPage: requestedPage , setRequestedPage: setRequestedPage , viewRef: viewRef , rowProps: rowProps  }) {
     return table ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)((0, $gXNCa$reactjsxruntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $897ab80ac9cafe91$export$2e2bcd8739ae039), {
                 table: table,
                 loading: loading,
                 loadingOffset: loadingOffset,
-                viewRef: viewRef
+                viewRef: viewRef,
+                rowProps: rowProps
             }),
             /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $00fb4e70fc0faafb$export$2e2bcd8739ae039), {
                 table: table,

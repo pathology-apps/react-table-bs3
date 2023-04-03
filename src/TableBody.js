@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import TableRow from './TableRow'
 
-function TableBody({table}) {
+function TableBody({table, rowProps}) {
     const rowModel = table.getRowModel()
     if (!rowModel?.rows?.length) {
         return <tbody />
@@ -11,7 +11,7 @@ function TableBody({table}) {
     return (
         <tbody>
             {table.getRowModel().rows.map((row) => (
-                <TableRow key={`${row.id}_tableRow`} row={row} />
+                <TableRow key={`${row.id}_tableRow`} row={row} rowProps={rowProps} />
             ))}
         </tbody>
     )

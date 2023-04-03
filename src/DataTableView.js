@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import LoadingScreen from './LoadingScreen'
 import Table from './Table'
 
-function DataTableView({viewRef, loading, loadingOffset, table}) {
+function DataTableView({viewRef, loading, loadingOffset, table, rowProps}) {
     return (
         <div
             ref={viewRef}
@@ -13,7 +13,7 @@ function DataTableView({viewRef, loading, loadingOffset, table}) {
             }}
         >
             <LoadingScreen loading={loading} loadingOffset={loadingOffset} />
-            <Table table={table} />
+            <Table table={table} rowProps={rowProps} />
         </div>
     )
 }

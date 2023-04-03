@@ -5,7 +5,7 @@ import TableBody from './TableBody'
 import { DndProvider } from 'react-dnd'
 import { HTML5Backend } from 'react-dnd-html5-backend'
 
-function Table({table}) {
+function Table({table, rowProps}) {
     return (
         <DndProvider backend={HTML5Backend}>
             <table
@@ -14,7 +14,7 @@ function Table({table}) {
                 }}
             >
                 <TableHead table={table} />
-                <TableBody table={table} />
+                <TableBody table={table} rowProps={rowProps} />
             </table>
         </DndProvider>
     )

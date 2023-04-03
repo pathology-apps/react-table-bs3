@@ -13,6 +13,7 @@ function BootstrapTable({
     requestedPage,
     setRequestedPage,
     viewRef,
+    rowProps,
 }) {
     return table ? (
         <>
@@ -21,6 +22,7 @@ function BootstrapTable({
                 loading={loading}
                 loadingOffset={loadingOffset}
                 viewRef={viewRef}
+                rowProps={rowProps}
             />
             <DataFooter
                 table={table}

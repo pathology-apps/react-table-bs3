@@ -19,9 +19,9 @@ function $parcel$export(e, n, v, s) {
 $parcel$defineInteropFlag(module.exports);
 
 $parcel$export(module.exports, "default", () => $4fa36e821943b400$export$2e2bcd8739ae039);
+$parcel$export(module.exports, "GroupingButton", () => $c1dc35055a36ee94$export$2e2bcd8739ae039);
 $parcel$export(module.exports, "tableFilter", () => $125a85f138d8a4a2$export$9d9ea8dbe2f59d9a);
 $parcel$export(module.exports, "valueFilter", () => $125a85f138d8a4a2$export$95551f3ba34233a8);
-$parcel$export(module.exports, "GroupingButton", () => $c1dc35055a36ee94$export$2e2bcd8739ae039);
 
 
 
@@ -830,32 +830,33 @@ var $c1dc35055a36ee94$export$2e2bcd8739ae039 = $c1dc35055a36ee94$var$GroupingBut
 
 
 
-function $4fa36e821943b400$var$BootstrapTable({ loading: loading , loadingOffset: loadingOffset , requestedPage: requestedPage , rowProps: rowProps , setRequestedPage: setRequestedPage , table: table , tableProps: tableProps , viewRef: viewRef  }) {
+function $4fa36e821943b400$var$BootstrapTable({ cellProps: cellProps = ()=>{} , loading: loading , loadingOffset: loadingOffset , requestedPage: requestedPage , rowProps: rowProps = ()=>{} , setRequestedPage: setRequestedPage , table: table , tableProps: tableProps = ()=>{} , viewRef: viewRef  }) {
     return table ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)((0, $gXNCa$reactjsxruntime.Fragment), {
         children: [
             /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $897ab80ac9cafe91$export$2e2bcd8739ae039), {
-                table: table,
+                cellProps: cellProps,
                 loading: loading,
                 loadingOffset: loadingOffset,
-                viewRef: viewRef,
                 rowProps: rowProps,
-                tableProps: tableProps
+                table: table,
+                tableProps: tableProps,
+                viewRef: viewRef
             }),
             /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $00fb4e70fc0faafb$export$2e2bcd8739ae039), {
-                table: table,
+                loading: loading,
                 requestedPage: requestedPage,
                 setRequestedPage: setRequestedPage,
-                loading: loading
+                table: table
             })
         ]
     }) : null;
 }
 $4fa36e821943b400$var$BootstrapTable.propTypes = {
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
     loading: (0, ($parcel$interopDefault($gXNCa$proptypes))).bool,
     loadingOffset: (0, ($parcel$interopDefault($gXNCa$proptypes))).number,
     requestedPage: (0, ($parcel$interopDefault($gXNCa$proptypes))).number,
     setRequestedPage: (0, ($parcel$interopDefault($gXNCa$proptypes))).func,
+    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
     viewRef: (0, ($parcel$interopDefault($gXNCa$proptypes))).object
 };
 var $4fa36e821943b400$export$2e2bcd8739ae039 = $4fa36e821943b400$var$BootstrapTable;

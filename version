@@ -1,4 +1,5 @@
 #!/bin/bash
+set -e
 
 # Usage: ./version <major|minor|patch> - Increments the relevant version part by one.
 #
@@ -115,14 +116,14 @@ if [ $? -ne 0 ]; then
 fi
 echo "🔑 Network connected."
 
+echo "Building project..."
+docker run --rm -v "$(pwd)":/app -w /app -u $(id -u):$(id -g) -e npm_config_cache=/tmp/.npm node:19 sh -c "npm i && npm run build"
+
 confirm "Bump version number from $current_version to $new_version?"
 new_tag="$new_version"
 bump_files "$current_version" "$new_version"
 
 confirm "Publish $new_tag?"
-
-echo "Building project..."
-docker run --rm -v "$(pwd)":/app -w /app -u $(id -u):$(id -g) node npm run build
 
 echo "Syncing remote tags..."
 git config fetch.prune true

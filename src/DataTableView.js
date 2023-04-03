@@ -8,6 +8,7 @@ function DataTableView({
     loadingOffset, 
     rowProps,
     table, 
+    tableProps,
     viewRef, 
 }) {
     return (

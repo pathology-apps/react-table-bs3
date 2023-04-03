@@ -15,7 +15,7 @@ function Table({
             <table
                 {...{
                     className: "react-table-bs3 table table-condensed table-bordered",
-                    ...tableProps,
+                    ...tableProps(table),
                 }}
             >
                 <TableHead table={table} />

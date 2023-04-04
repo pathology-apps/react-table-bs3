@@ -1,41 +1,23 @@
-require("./main.css");
-var $gXNCa$reactjsxruntime = require("react/jsx-runtime");
-var $gXNCa$react = require("react");
-var $gXNCa$proptypes = require("prop-types");
-var $gXNCa$reactdnd = require("react-dnd");
-var $gXNCa$reactdndhtml5backend = require("react-dnd-html5-backend");
-var $gXNCa$tanstackreacttable = require("@tanstack/react-table");
-
-function $parcel$interopDefault(a) {
-  return a && a.__esModule ? a.default : a;
-}
-function $parcel$defineInteropFlag(a) {
-  Object.defineProperty(a, '__esModule', {value: true, configurable: true});
-}
-function $parcel$export(e, n, v, s) {
-  Object.defineProperty(e, n, {get: v, set: s, enumerable: true, configurable: true});
-}
-
-$parcel$defineInteropFlag(module.exports);
-
-$parcel$export(module.exports, "default", () => $4fa36e821943b400$export$2e2bcd8739ae039);
-$parcel$export(module.exports, "GroupingButton", () => $c1dc35055a36ee94$export$2e2bcd8739ae039);
-$parcel$export(module.exports, "tableFilter", () => $125a85f138d8a4a2$export$9d9ea8dbe2f59d9a);
-$parcel$export(module.exports, "valueFilter", () => $125a85f138d8a4a2$export$95551f3ba34233a8);
+import "./main.css";
+import {jsxs as $4MPRY$jsxs, Fragment as $4MPRY$Fragment, jsx as $4MPRY$jsx} from "react/jsx-runtime";
+import {useState as $4MPRY$useState, useEffect as $4MPRY$useEffect} from "react";
+import {DndProvider as $4MPRY$DndProvider, useDrop as $4MPRY$useDrop, useDrag as $4MPRY$useDrag} from "react-dnd";
+import {HTML5Backend as $4MPRY$HTML5Backend} from "react-dnd-html5-backend";
+import {flexRender as $4MPRY$flexRender} from "@tanstack/react-table";
 
 
 
 // Checks any object, array, string, or integer exhaustively for a value
-const $125a85f138d8a4a2$var$recursiveFilter = (concern, value)=>{
+const $76592b60f149be3e$var$recursiveFilter = (concern, value)=>{
     if (Array.isArray(concern)) return concern.some((item)=>{
-        if ($125a85f138d8a4a2$var$recursiveFilter(item, value)) return true;
+        if ($76592b60f149be3e$var$recursiveFilter(item, value)) return true;
         return false;
     });
     if (typeof concern === "object") {
         if (concern === null) return false;
         const keys = Object.keys(concern);
         return keys.some((key)=>{
-            if ($125a85f138d8a4a2$var$recursiveFilter(concern[key], value)) return true;
+            if ($76592b60f149be3e$var$recursiveFilter(concern[key], value)) return true;
             return false;
         });
     }
@@ -49,12 +31,12 @@ const $125a85f138d8a4a2$var$recursiveFilter = (concern, value)=>{
     }
     return false;
 };
-const $125a85f138d8a4a2$export$9d9ea8dbe2f59d9a = (row, columnId, value)=>{
+const $76592b60f149be3e$export$9d9ea8dbe2f59d9a = (row, columnId, value)=>{
     let concern = row.original[columnId];
     if (!concern) concern = row.renderValue(columnId);
-    return $125a85f138d8a4a2$var$recursiveFilter(concern, value);
+    return $76592b60f149be3e$var$recursiveFilter(concern, value);
 };
-const $125a85f138d8a4a2$export$95551f3ba34233a8 = (row, columnId, value)=>{
+const $76592b60f149be3e$export$95551f3ba34233a8 = (row, columnId, value)=>{
     const concern = row.renderValue(columnId);
     if (!concern || false) return false;
     // Check if concern contains value:
@@ -67,44 +49,38 @@ const $125a85f138d8a4a2$export$95551f3ba34233a8 = (row, columnId, value)=>{
 
 
 
-
-function $7a56fabb9a6fd445$var$NextButton({ loading: loading , table: table  }) {
+function $c48bdfcb5a725a8e$var$NextButton({ loading: loading , table: table  }) {
     // If loading is undefined, set it to false:
     loading = loading || false;
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("button", {
         type: "button",
         className: table.getCanNextPage() && loading === false ? "btn btn-primary btn-block" : "btn btn-block disabled",
         onClick: ()=>table.getCanNextPage() && table.nextPage(),
         children: "Next"
     });
 }
-$7a56fabb9a6fd445$var$NextButton.propTypes = {
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
-    loading: (0, ($parcel$interopDefault($gXNCa$proptypes))).bool
-};
-var $7a56fabb9a6fd445$export$2e2bcd8739ae039 = $7a56fabb9a6fd445$var$NextButton;
+var $c48bdfcb5a725a8e$export$2e2bcd8739ae039 = $c48bdfcb5a725a8e$var$NextButton;
 
 
 
 
-
-function $e43006d4478e83c8$var$PageSelector({ requestedPage: requestedPage , setRequestedPage: setRequestedPage , table: table  }) {
+function $61aac0ca294d0b40$var$PageSelector({ requestedPage: requestedPage , setRequestedPage: setRequestedPage , table: table  }) {
     // requestedPage and setRequestedPage might be undefined if the table is not paginated on the server, so we need to make local state to track the [requestedPage, setRequestedPage] state.
-    const [localRequestedPage, setLocalRequestedPage] = (0, $gXNCa$react.useState)(1);
+    const [localRequestedPage, setLocalRequestedPage] = (0, $4MPRY$useState)(1);
     // If requestedPage is undefined, we use the localRequestedPage state.
     const finalRequestedPage = requestedPage === undefined ? localRequestedPage : requestedPage;
     // If setRequestedPage is undefined, we use the setLocalRequestedPage function.
     const finalSetRequestedPage = setRequestedPage === undefined ? setLocalRequestedPage : setRequestedPage;
-    (0, $gXNCa$react.useEffect)(()=>{
+    (0, $4MPRY$useEffect)(()=>{
         setLocalRequestedPage(table.getState().pagination.pageIndex + 1);
     }, [
         table.getState().pagination.pageIndex
     ]);
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("span", {
+    return /*#__PURE__*/ (0, $4MPRY$jsxs)("span", {
         children: [
             "Page",
             " ",
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("input", {
+            /*#__PURE__*/ (0, $4MPRY$jsx)("input", {
                 type: "number",
                 value: finalRequestedPage,
                 onKeyDown: (e)=>{
@@ -126,19 +102,13 @@ function $e43006d4478e83c8$var$PageSelector({ requestedPage: requestedPage , set
         ]
     });
 }
-$e43006d4478e83c8$var$PageSelector.propTypes = {
-    requestedPage: (0, ($parcel$interopDefault($gXNCa$proptypes))).number,
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
-    setRequestedPage: (0, ($parcel$interopDefault($gXNCa$proptypes))).func
-};
-var $e43006d4478e83c8$export$2e2bcd8739ae039 = $e43006d4478e83c8$var$PageSelector;
+var $61aac0ca294d0b40$export$2e2bcd8739ae039 = $61aac0ca294d0b40$var$PageSelector;
 
 
 
 
-
-function $db66f56970dc2999$var$PageSizeSelector({ table: table  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("select", {
+function $01504841efe4a746$var$PageSizeSelector({ table: table  }) {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("select", {
         value: table.getState().pagination.pageSize,
         style: {
             width: "100px"
@@ -156,7 +126,7 @@ function $db66f56970dc2999$var$PageSizeSelector({ table: table  }) {
             30,
             40,
             50
-        ].map((pageSize)=>/*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("option", {
+        ].map((pageSize)=>/*#__PURE__*/ (0, $4MPRY$jsxs)("option", {
                 value: pageSize,
                 children: [
                     pageSize,
@@ -165,83 +135,74 @@ function $db66f56970dc2999$var$PageSizeSelector({ table: table  }) {
             }, pageSize))
     });
 }
-$db66f56970dc2999$var$PageSizeSelector.propTypes = {
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $db66f56970dc2999$export$2e2bcd8739ae039 = $db66f56970dc2999$var$PageSizeSelector;
+var $01504841efe4a746$export$2e2bcd8739ae039 = $01504841efe4a746$var$PageSizeSelector;
 
 
 
 
-
-function $b0e17dedfdca18cb$var$PreviousButton({ loading: loading , table: table  }) {
+function $879f0feeb7e67943$var$PreviousButton({ loading: loading , table: table  }) {
     // If loading is undefined, set it to false:
     loading = loading || false;
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("button", {
         type: "button",
         className: table.getCanPreviousPage() && loading === false ? "btn btn-primary btn-block" : "btn btn-block disabled",
         onClick: ()=>table.getCanPreviousPage() && table.previousPage(),
         children: "Previous"
     });
 }
-$b0e17dedfdca18cb$var$PreviousButton.propTypes = {
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
-    loading: (0, ($parcel$interopDefault($gXNCa$proptypes))).bool
-};
-var $b0e17dedfdca18cb$export$2e2bcd8739ae039 = $b0e17dedfdca18cb$var$PreviousButton;
+var $879f0feeb7e67943$export$2e2bcd8739ae039 = $879f0feeb7e67943$var$PreviousButton;
 
 
-
-function $00fb4e70fc0faafb$var$DataFooter({ loading: loading , requestedPage: requestedPage , setRequestedPage: setRequestedPage , table: table  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+function $4aa40443a491d05e$var$DataFooter({ loading: loading , requestedPage: requestedPage , setRequestedPage: setRequestedPage , table: table  }) {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("div", {
         className: "well well-sm",
-        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+        children: /*#__PURE__*/ (0, $4MPRY$jsx)("div", {
             className: "row",
-            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+            children: /*#__PURE__*/ (0, $4MPRY$jsx)("div", {
                 className: "col col-xs-12",
-                children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("div", {
+                children: /*#__PURE__*/ (0, $4MPRY$jsxs)("div", {
                     style: {
                         display: "flex",
                         gap: ".5em",
                         justifyContent: "space-evenly"
                     },
                     children: [
-                        /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+                        /*#__PURE__*/ (0, $4MPRY$jsx)("div", {
                             style: {
                                 display: "contents"
                             },
-                            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $b0e17dedfdca18cb$export$2e2bcd8739ae039), {
+                            children: /*#__PURE__*/ (0, $4MPRY$jsx)((0, $879f0feeb7e67943$export$2e2bcd8739ae039), {
                                 table: table,
                                 loading: loading
                             })
                         }),
-                        /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+                        /*#__PURE__*/ (0, $4MPRY$jsx)("div", {
                             style: {
                                 minWidth: "200px",
                                 display: "flex",
                                 justifyContent: "center"
                             },
-                            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $e43006d4478e83c8$export$2e2bcd8739ae039), {
+                            children: /*#__PURE__*/ (0, $4MPRY$jsx)((0, $61aac0ca294d0b40$export$2e2bcd8739ae039), {
                                 table: table,
                                 requestedPage: requestedPage,
                                 setRequestedPage: setRequestedPage
                             })
                         }),
-                        /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+                        /*#__PURE__*/ (0, $4MPRY$jsx)("div", {
                             style: {
                                 minWidth: "200px",
                                 display: "flex",
                                 justifyContent: "center"
                             },
-                            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $db66f56970dc2999$export$2e2bcd8739ae039), {
+                            children: /*#__PURE__*/ (0, $4MPRY$jsx)((0, $01504841efe4a746$export$2e2bcd8739ae039), {
                                 table: table
                             })
                         }),
-                        /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+                        /*#__PURE__*/ (0, $4MPRY$jsx)("div", {
                             style: {
                                 display: "contents"
                             },
-                            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $7a56fabb9a6fd445$export$2e2bcd8739ae039), {
+                            children: /*#__PURE__*/ (0, $4MPRY$jsx)((0, $c48bdfcb5a725a8e$export$2e2bcd8739ae039), {
                                 table: table,
                                 loading: loading
                             })
@@ -252,41 +213,33 @@ function $00fb4e70fc0faafb$var$DataFooter({ loading: loading , requestedPage: re
         })
     });
 }
-$00fb4e70fc0faafb$var$DataFooter.propTypes = {
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
-    loading: (0, ($parcel$interopDefault($gXNCa$proptypes))).bool,
-    requestedPage: (0, ($parcel$interopDefault($gXNCa$proptypes))).number,
-    setRequestedPage: (0, ($parcel$interopDefault($gXNCa$proptypes))).func
-};
-var $00fb4e70fc0faafb$export$2e2bcd8739ae039 = $00fb4e70fc0faafb$var$DataFooter;
+var $4aa40443a491d05e$export$2e2bcd8739ae039 = $4aa40443a491d05e$var$DataFooter;
 
 
 
 
 
 
-
-
-function $13ef7f0473e481e2$var$LoadingScreen({ loading: loading , loadingOffset: loadingOffset  }) {
+function $a79c5d361a825d07$var$LoadingScreen({ loading: loading , loadingOffset: loadingOffset  }) {
     if (!loading) return null;
     const className = `loading ${loading ? "progress" : ""}`;
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("div", {
         className: className,
         style: {
             left: loadingOffset
         },
-        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("span", {
+        children: /*#__PURE__*/ (0, $4MPRY$jsxs)("span", {
             children: [
                 "Loading",
-                /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                /*#__PURE__*/ (0, $4MPRY$jsx)("span", {
                     className: "one",
                     children: "."
                 }),
-                /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                /*#__PURE__*/ (0, $4MPRY$jsx)("span", {
                     className: "two",
                     children: "."
                 }),
-                /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                /*#__PURE__*/ (0, $4MPRY$jsx)("span", {
                     className: "three",
                     children: "."
                 })
@@ -294,11 +247,7 @@ function $13ef7f0473e481e2$var$LoadingScreen({ loading: loading , loadingOffset:
         })
     });
 }
-$13ef7f0473e481e2$var$LoadingScreen.propTypes = {
-    loading: (0, ($parcel$interopDefault($gXNCa$proptypes))).bool,
-    loadingOffset: (0, ($parcel$interopDefault($gXNCa$proptypes))).number
-};
-var $13ef7f0473e481e2$export$2e2bcd8739ae039 = $13ef7f0473e481e2$var$LoadingScreen;
+var $a79c5d361a825d07$export$2e2bcd8739ae039 = $a79c5d361a825d07$var$LoadingScreen;
 
 
 
@@ -312,23 +261,19 @@ var $13ef7f0473e481e2$export$2e2bcd8739ae039 = $13ef7f0473e481e2$var$LoadingScre
 
 
 
-
-
-
-
-function $e351aac700bc7968$var$TableCell({ cell: cell , cellProps: cellProps , row: row  }) {
+function $1884ee073740af56$var$TableCell({ cell: cell , cellProps: cellProps , row: row  }) {
     // For cells with repeated values, render null
     // Otherwise, just render the regular cell
-    let cellRender = (0, $gXNCa$tanstackreacttable.flexRender)(cell.column.columnDef.cell, cell.getContext());
+    let cellRender = (0, $4MPRY$flexRender)(cell.column.columnDef.cell, cell.getContext());
     if (cell.getIsGrouped()) // If it's a grouped cell, add an expander and row count
-    cellRender = /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("button", {
+    cellRender = /*#__PURE__*/ (0, $4MPRY$jsxs)("button", {
         type: "button",
         onClick: row.getToggleExpandedHandler(),
         style: {
             cursor: row.getCanExpand() ? "pointer" : "normal"
         },
         children: [
-            (0, $gXNCa$tanstackreacttable.flexRender)(cell.column.columnDef.cell, cell.getContext()),
+            (0, $4MPRY$flexRender)(cell.column.columnDef.cell, cell.getContext()),
             "\xa0 (",
             row.subRows.length,
             ")"
@@ -336,8 +281,8 @@ function $e351aac700bc7968$var$TableCell({ cell: cell , cellProps: cellProps , r
     });
     if (cell.getIsAggregated()) // If the cell is aggregated, use the Aggregated
     // renderer for cell
-    cellRender = (0, $gXNCa$tanstackreacttable.flexRender)(cell.column.columnDef.aggregatedCell ?? cell.column.columnDef.cell, cell.getContext());
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("td", {
+    cellRender = (0, $4MPRY$flexRender)(cell.column.columnDef.aggregatedCell ?? cell.column.columnDef.cell, cell.getContext());
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("td", {
         style: {
             width: cell.column.getSize(),
             maxWidth: cell.column.getSize(),
@@ -348,44 +293,34 @@ function $e351aac700bc7968$var$TableCell({ cell: cell , cellProps: cellProps , r
         children: cellRender
     });
 }
-$e351aac700bc7968$var$TableCell.propTypes = {
-    cell: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
-    row: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $e351aac700bc7968$export$2e2bcd8739ae039 = $e351aac700bc7968$var$TableCell;
+var $1884ee073740af56$export$2e2bcd8739ae039 = $1884ee073740af56$var$TableCell;
 
 
-function $cc4764bcb2dbe5fa$var$TableRow({ cellProps: cellProps , row: row , rowProps: rowProps  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tr", {
+function $f348eedacd33e478$var$TableRow({ cellProps: cellProps , row: row , rowProps: rowProps  }) {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("tr", {
         ...rowProps(row),
-        children: row.getVisibleCells().map((cell)=>/*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $e351aac700bc7968$export$2e2bcd8739ae039), {
+        children: row.getVisibleCells().map((cell)=>/*#__PURE__*/ (0, $4MPRY$jsx)((0, $1884ee073740af56$export$2e2bcd8739ae039), {
                 cell: cell,
                 cellProps: cellProps,
                 row: row
             }, `${cell.id}_tableCell`))
     });
 }
-$cc4764bcb2dbe5fa$var$TableRow.propTypes = {
-    row: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $cc4764bcb2dbe5fa$export$2e2bcd8739ae039 = $cc4764bcb2dbe5fa$var$TableRow;
+var $f348eedacd33e478$export$2e2bcd8739ae039 = $f348eedacd33e478$var$TableRow;
 
 
-function $189fb20378fd77c6$var$TableBody({ cellProps: cellProps , rowProps: rowProps , table: table  }) {
+function $8f7210c3d51ef797$var$TableBody({ cellProps: cellProps , rowProps: rowProps , table: table  }) {
     const rowModel = table.getRowModel();
-    if (!rowModel?.rows?.length) return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tbody", {});
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tbody", {
-        children: table.getRowModel().rows.map((row)=>/*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $cc4764bcb2dbe5fa$export$2e2bcd8739ae039), {
+    if (!rowModel?.rows?.length) return /*#__PURE__*/ (0, $4MPRY$jsx)("tbody", {});
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("tbody", {
+        children: table.getRowModel().rows.map((row)=>/*#__PURE__*/ (0, $4MPRY$jsx)((0, $f348eedacd33e478$export$2e2bcd8739ae039), {
                 cellProps: cellProps,
                 row: row,
                 rowProps: rowProps
             }, `${row.id}_tableRow`))
     });
 }
-$189fb20378fd77c6$var$TableBody.propTypes = {
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $189fb20378fd77c6$export$2e2bcd8739ae039 = $189fb20378fd77c6$var$TableBody;
+var $8f7210c3d51ef797$export$2e2bcd8739ae039 = $8f7210c3d51ef797$var$TableBody;
 
 
 
@@ -404,22 +339,14 @@ var $189fb20378fd77c6$export$2e2bcd8739ae039 = $189fb20378fd77c6$var$TableBody;
 
 
 
-
-
-
-
-
-
-
-
-function $bdfab28ad4b1f309$var$DebouncedInput({ debounce: debounce = 500 , onChange: onChange , value: initialValue , ...props }) {
-    const [value, setValue] = (0, $gXNCa$react.useState)(initialValue);
-    (0, $gXNCa$react.useEffect)(()=>{
+function $4f18c3bf20d07ea0$var$DebouncedInput({ debounce: debounce = 500 , onChange: onChange , value: initialValue , ...props }) {
+    const [value, setValue] = (0, $4MPRY$useState)(initialValue);
+    (0, $4MPRY$useEffect)(()=>{
         setValue(initialValue);
     }, [
         initialValue
     ]);
-    (0, $gXNCa$react.useEffect)(()=>{
+    (0, $4MPRY$useEffect)(()=>{
         const timeout = setTimeout(()=>{
             onChange(value);
         }, debounce);
@@ -427,24 +354,19 @@ function $bdfab28ad4b1f309$var$DebouncedInput({ debounce: debounce = 500 , onCha
     }, [
         value
     ]);
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("input", {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("input", {
         ...props,
         value: value,
         onChange: (e)=>setValue(e.target.value)
     });
 }
-$bdfab28ad4b1f309$var$DebouncedInput.propTypes = {
-    value: (0, ($parcel$interopDefault($gXNCa$proptypes))).string.isRequired,
-    onChange: (0, ($parcel$interopDefault($gXNCa$proptypes))).func.isRequired,
-    debounce: (0, ($parcel$interopDefault($gXNCa$proptypes))).number
-};
-var $bdfab28ad4b1f309$export$2e2bcd8739ae039 = $bdfab28ad4b1f309$var$DebouncedInput;
+var $4f18c3bf20d07ea0$export$2e2bcd8739ae039 = $4f18c3bf20d07ea0$var$DebouncedInput;
 
 
-function $d95f3d6ee5389fd5$var$Filter({ column: column  }) {
+function $d20e4c49717ec33d$var$Filter({ column: column  }) {
     const columnFilterValue = column.getFilterValue();
     if (!column.getCanFilter()) return null;
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $bdfab28ad4b1f309$export$2e2bcd8739ae039), {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)((0, $4f18c3bf20d07ea0$export$2e2bcd8739ae039), {
         type: "text",
         value: columnFilterValue ?? "",
         onChange: (value)=>column.setFilterValue(value),
@@ -456,32 +378,28 @@ function $d95f3d6ee5389fd5$var$Filter({ column: column  }) {
         list: `${column.id}_list`
     });
 }
-$d95f3d6ee5389fd5$var$Filter.propTypes = {
-    column: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $d95f3d6ee5389fd5$export$2e2bcd8739ae039 = $d95f3d6ee5389fd5$var$Filter;
+var $d20e4c49717ec33d$export$2e2bcd8739ae039 = $d20e4c49717ec33d$var$Filter;
 
 
-function $e4b55be42d42b24f$var$GroupedHeader({ header: header , table: table  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)((0, $gXNCa$reactjsxruntime.Fragment), {
+function $6ed532f1ce0fa00f$var$GroupedHeader({ header: header  }) {
+    return /*#__PURE__*/ (0, $4MPRY$jsxs)((0, $4MPRY$Fragment), {
         children: [
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $d95f3d6ee5389fd5$export$2e2bcd8739ae039), {
-                column: header.column,
-                table: table
+            /*#__PURE__*/ (0, $4MPRY$jsx)((0, $d20e4c49717ec33d$export$2e2bcd8739ae039), {
+                column: header.column
             }),
-            header.column.getCanGroup() ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+            header.column.getCanGroup() ? /*#__PURE__*/ (0, $4MPRY$jsx)("span", {
                 className: "input-group-btn",
-                children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
+                children: /*#__PURE__*/ (0, $4MPRY$jsx)("button", {
                     type: "button",
                     className: "btn btn-default",
                     onClick: header.column.getToggleGroupingHandler(),
                     style: {
                         cursor: "pointer"
                     },
-                    children: header.column.getIsGrouped() ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                    children: header.column.getIsGrouped() ? /*#__PURE__*/ (0, $4MPRY$jsx)("span", {
                         className: "glyphicon glyphicon-remove-sign",
                         "aria-hidden": "true"
-                    }) : /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                    }) : /*#__PURE__*/ (0, $4MPRY$jsx)("span", {
                         className: "glyphicon glyphicon-duplicate",
                         "aria-hidden": "true"
                     })
@@ -490,34 +408,26 @@ function $e4b55be42d42b24f$var$GroupedHeader({ header: header , table: table  })
         ]
     });
 }
-$e4b55be42d42b24f$var$GroupedHeader.propTypes = {
-    header: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $e4b55be42d42b24f$export$2e2bcd8739ae039 = $e4b55be42d42b24f$var$GroupedHeader;
+var $6ed532f1ce0fa00f$export$2e2bcd8739ae039 = $6ed532f1ce0fa00f$var$GroupedHeader;
 
 
-function $595a48911cfa1a11$var$FilteredHeader({ header: header , table: table  }) {
-    return header.column.getCanGroup() ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+function $a968b396f1e5232e$var$FilteredHeader({ header: header , table: table  }) {
+    return header.column.getCanGroup() ? /*#__PURE__*/ (0, $4MPRY$jsx)("div", {
         className: "input-group",
-        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $e4b55be42d42b24f$export$2e2bcd8739ae039), {
+        children: /*#__PURE__*/ (0, $4MPRY$jsx)((0, $6ed532f1ce0fa00f$export$2e2bcd8739ae039), {
             header: header,
             table: table
         })
-    }) : /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $e4b55be42d42b24f$export$2e2bcd8739ae039), {
+    }) : /*#__PURE__*/ (0, $4MPRY$jsx)((0, $6ed532f1ce0fa00f$export$2e2bcd8739ae039), {
         header: header,
         table: table
     });
 }
-$595a48911cfa1a11$var$FilteredHeader.propTypes = {
-    header: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $595a48911cfa1a11$export$2e2bcd8739ae039 = $595a48911cfa1a11$var$FilteredHeader;
+var $a968b396f1e5232e$export$2e2bcd8739ae039 = $a968b396f1e5232e$var$FilteredHeader;
 
 
-function $8e46f893e4a0991d$var$FilteredHeaderCell({ header: header , table: table  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("th", {
+function $9323f4008460d48d$var$FilteredHeaderCell({ header: header , table: table  }) {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("th", {
         colSpan: header.colSpan,
         style: {
             width: header.getSize(),
@@ -525,32 +435,24 @@ function $8e46f893e4a0991d$var$FilteredHeaderCell({ header: header , table: tabl
             wordWrap: "break-word",
             position: "relative"
         },
-        children: header.column.getCanFilter() ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $595a48911cfa1a11$export$2e2bcd8739ae039), {
+        children: header.column.getCanFilter() ? /*#__PURE__*/ (0, $4MPRY$jsx)((0, $a968b396f1e5232e$export$2e2bcd8739ae039), {
             header: header,
             table: table
         }) : null
     });
 }
-$8e46f893e4a0991d$var$FilteredHeaderCell.propTypes = {
-    header: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $8e46f893e4a0991d$export$2e2bcd8739ae039 = $8e46f893e4a0991d$var$FilteredHeaderCell;
+var $9323f4008460d48d$export$2e2bcd8739ae039 = $9323f4008460d48d$var$FilteredHeaderCell;
 
 
-function $5c8c3a5ac16dccd8$var$FilteredHeaderRow({ headerGroup: headerGroup , table: table  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tr", {
-        children: headerGroup.headers.map((header)=>/*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $8e46f893e4a0991d$export$2e2bcd8739ae039), {
+function $130822d1fadad788$var$FilteredHeaderRow({ headerGroup: headerGroup , table: table  }) {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("tr", {
+        children: headerGroup.headers.map((header)=>/*#__PURE__*/ (0, $4MPRY$jsx)((0, $9323f4008460d48d$export$2e2bcd8739ae039), {
                 header: header,
                 table: table
             }, `${header.id}_filterCell`))
-    }, `${headerGroup.i}_filter`);
+    }, `${headerGroup.id}_filter`);
 }
-$5c8c3a5ac16dccd8$var$FilteredHeaderRow.propTypes = {
-    headerGroup: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $5c8c3a5ac16dccd8$export$2e2bcd8739ae039 = $5c8c3a5ac16dccd8$var$FilteredHeaderRow;
+var $130822d1fadad788$export$2e2bcd8739ae039 = $130822d1fadad788$var$FilteredHeaderRow;
 
 
 
@@ -563,16 +465,14 @@ var $5c8c3a5ac16dccd8$export$2e2bcd8739ae039 = $5c8c3a5ac16dccd8$var$FilteredHea
 
 
 
-
-
-function $2f255ee1acdf2141$export$2e2bcd8739ae039({ header: header  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
+function $f5a76ed59462d3b3$export$2e2bcd8739ae039({ header: header  }) {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("button", {
         className: "btn btn-link btn-xs",
         onClick: (e)=>{
             e.stopPropagation();
             header.column.pin(false);
         },
-        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+        children: /*#__PURE__*/ (0, $4MPRY$jsx)("span", {
             style: {
                 color: "#337ab7"
             },
@@ -583,49 +483,49 @@ function $2f255ee1acdf2141$export$2e2bcd8739ae039({ header: header  }) {
 }
 
 
-const $e08f3ccbd063a785$var$reorderColumn = (draggedColumnId, targetColumnId, columnOrder)=>{
+const $b9c565d9f4f0468f$var$reorderColumn = (draggedColumnId, targetColumnId, columnOrder)=>{
     columnOrder.splice(columnOrder.indexOf(targetColumnId), 0, columnOrder.splice(columnOrder.indexOf(draggedColumnId), 1)[0]);
     return [
         ...columnOrder
     ];
 };
-function $e08f3ccbd063a785$export$2e2bcd8739ae039({ children: children , header: header , table: table  }) {
+function $b9c565d9f4f0468f$export$2e2bcd8739ae039({ children: children , header: header , table: table  }) {
     const { getState: getState , setColumnOrder: setColumnOrder  } = table;
     const { columnOrder: columnOrder  } = getState();
     const { column: column  } = header;
-    const [, dropRef] = (0, $gXNCa$reactdnd.useDrop)({
+    const [, dropRef] = (0, $4MPRY$useDrop)({
         accept: "column",
         drop: (draggedColumn)=>{
-            const newColumnOrder = $e08f3ccbd063a785$var$reorderColumn(draggedColumn.id, column.id, columnOrder);
+            const newColumnOrder = $b9c565d9f4f0468f$var$reorderColumn(draggedColumn.id, column.id, columnOrder);
             setColumnOrder(newColumnOrder);
         }
     });
-    const [{ isDragging: isDragging  }, dragRef, previewRef] = (0, $gXNCa$reactdnd.useDrag)({
+    const [{ isDragging: isDragging  }, dragRef, previewRef] = (0, $4MPRY$useDrag)({
         collect: (monitor)=>({
                 isDragging: monitor.isDragging()
             }),
         item: ()=>column,
         type: "column"
     });
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("div", {
         ref: dragRef,
-        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+        children: /*#__PURE__*/ (0, $4MPRY$jsx)("div", {
             ref: dropRef,
             colSpan: header.colSpan,
             style: {
                 opacity: isDragging ? 0.5 : 1,
                 width: "100%"
             },
-            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+            children: /*#__PURE__*/ (0, $4MPRY$jsx)("div", {
                 style: {
                     display: "flex",
                     justifyContent: "space-between",
                     overflow: "hidden"
                 },
                 ref: previewRef,
-                children: !header.isPlaceholder && header.column.getCanPin() && /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)((0, $gXNCa$reactjsxruntime.Fragment), {
+                children: !header.isPlaceholder && header.column.getCanPin() && /*#__PURE__*/ (0, $4MPRY$jsxs)((0, $4MPRY$Fragment), {
                     children: [
-                        header.column.getIsPinned() !== "left" ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
+                        header.column.getIsPinned() !== "left" ? /*#__PURE__*/ (0, $4MPRY$jsx)("button", {
                             className: "btn btn-link btn-xs",
                             style: {
                                 color: "#ddd"
@@ -634,15 +534,15 @@ function $e08f3ccbd063a785$export$2e2bcd8739ae039({ children: children , header:
                                 e.stopPropagation();
                                 header.column.pin("left");
                             },
-                            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                            children: /*#__PURE__*/ (0, $4MPRY$jsx)("span", {
                                 className: "glyphicon glyphicon-chevron-left",
                                 "aria-hidden": "true"
                             })
-                        }) : /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $2f255ee1acdf2141$export$2e2bcd8739ae039), {
+                        }) : /*#__PURE__*/ (0, $4MPRY$jsx)((0, $f5a76ed59462d3b3$export$2e2bcd8739ae039), {
                             header: header
                         }),
                         children,
-                        header.column.getIsPinned() !== "right" ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
+                        header.column.getIsPinned() !== "right" ? /*#__PURE__*/ (0, $4MPRY$jsx)("button", {
                             className: "btn btn-link btn-xs",
                             style: {
                                 color: "#ddd"
@@ -651,11 +551,11 @@ function $e08f3ccbd063a785$export$2e2bcd8739ae039({ children: children , header:
                                 e.stopPropagation();
                                 header.column.pin("right");
                             },
-                            children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+                            children: /*#__PURE__*/ (0, $4MPRY$jsx)("span", {
                                 className: "glyphicon glyphicon-chevron-right",
                                 "aria-hidden": "true"
                             })
-                        }) : /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $2f255ee1acdf2141$export$2e2bcd8739ae039), {
+                        }) : /*#__PURE__*/ (0, $4MPRY$jsx)((0, $f5a76ed59462d3b3$export$2e2bcd8739ae039), {
                             header: header
                         })
                     ]
@@ -666,9 +566,9 @@ function $e08f3ccbd063a785$export$2e2bcd8739ae039({ children: children , header:
 }
 
 
-function $09b54aa5e2e7fc75$var$HeaderCell({ header: header , table: table  }) {
+function $734affc20df3030b$var$HeaderCell({ header: header , table: table  }) {
     const className = `${header.column.getIsSorted()} sortable`;
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("th", {
+    return /*#__PURE__*/ (0, $4MPRY$jsxs)("th", {
         colSpan: header.colSpan,
         className: header.column.getCanSort() ? className : undefined,
         style: {
@@ -679,12 +579,12 @@ function $09b54aa5e2e7fc75$var$HeaderCell({ header: header , table: table  }) {
         },
         onClick: header.column.getCanSort() ? header.column.getToggleSortingHandler() : undefined,
         children: [
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $e08f3ccbd063a785$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $4MPRY$jsx)((0, $b9c565d9f4f0468f$export$2e2bcd8739ae039), {
                 table: table,
                 header: header,
-                children: header.isPlaceholder ? null : (0, $gXNCa$tanstackreacttable.flexRender)(header.column.columnDef.header, header.getContext())
+                children: header.isPlaceholder ? null : (0, $4MPRY$flexRender)(header.column.columnDef.header, header.getContext())
             }, `${header.id}_headerTools`),
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("div", {
+            /*#__PURE__*/ (0, $4MPRY$jsx)("div", {
                 onClick: (e)=>e.stopPropagation(),
                 onMouseDown: header.getResizeHandler(),
                 onTouchStart: header.getResizeHandler(),
@@ -693,72 +593,59 @@ function $09b54aa5e2e7fc75$var$HeaderCell({ header: header , table: table  }) {
         ]
     });
 }
-$09b54aa5e2e7fc75$var$HeaderCell.propTypes = {
-    header: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $09b54aa5e2e7fc75$export$2e2bcd8739ae039 = $09b54aa5e2e7fc75$var$HeaderCell;
+var $734affc20df3030b$export$2e2bcd8739ae039 = $734affc20df3030b$var$HeaderCell;
 
 
-function $8f40fd94b98e2faf$var$HeaderRow({ headerGroup: headerGroup , table: table  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("tr", {
-        children: headerGroup.headers.map((header)=>/*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $09b54aa5e2e7fc75$export$2e2bcd8739ae039), {
+function $904b63de7398bbb7$var$HeaderRow({ headerGroup: headerGroup , table: table  }) {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("tr", {
+        children: headerGroup.headers.map((header)=>/*#__PURE__*/ (0, $4MPRY$jsx)((0, $734affc20df3030b$export$2e2bcd8739ae039), {
                 table: table,
                 header: header
             }, `${header.id}_headerCell`))
     });
 }
-$8f40fd94b98e2faf$var$HeaderRow.propTypes = {
-    headerGroup: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $8f40fd94b98e2faf$export$2e2bcd8739ae039 = $8f40fd94b98e2faf$var$HeaderRow;
+var $904b63de7398bbb7$export$2e2bcd8739ae039 = $904b63de7398bbb7$var$HeaderRow;
 
 
-function $fc691d32f71c7289$var$HeaderGroup({ headerGroup: headerGroup , table: table  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)((0, $gXNCa$reactjsxruntime.Fragment), {
+function $f7a34b249400f841$var$HeaderGroup({ headerGroup: headerGroup , table: table  }) {
+    return /*#__PURE__*/ (0, $4MPRY$jsxs)((0, $4MPRY$Fragment), {
         children: [
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $8f40fd94b98e2faf$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $4MPRY$jsx)((0, $904b63de7398bbb7$export$2e2bcd8739ae039), {
                 headerGroup: headerGroup,
                 table: table
             }),
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $5c8c3a5ac16dccd8$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $4MPRY$jsx)((0, $130822d1fadad788$export$2e2bcd8739ae039), {
                 headerGroup: headerGroup,
                 table: table
             })
         ]
     });
 }
-$fc691d32f71c7289$var$HeaderGroup.propTypes = {
-    headerGroup: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $fc691d32f71c7289$export$2e2bcd8739ae039 = $fc691d32f71c7289$var$HeaderGroup;
+var $f7a34b249400f841$export$2e2bcd8739ae039 = $f7a34b249400f841$var$HeaderGroup;
 
 
-function $56285dbff689bb79$var$TableHead({ table: table  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("thead", {
-        children: table.getHeaderGroups().map((headerGroup)=>/*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $fc691d32f71c7289$export$2e2bcd8739ae039), {
+function $61ce190e6b4a8993$var$TableHead({ table: table  }) {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("thead", {
+        children: table.getHeaderGroups().map((headerGroup)=>/*#__PURE__*/ (0, $4MPRY$jsx)((0, $f7a34b249400f841$export$2e2bcd8739ae039), {
                 headerGroup: headerGroup,
                 table: table
             }, headerGroup.id))
     });
 }
-$56285dbff689bb79$var$TableHead.propTypes = {
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $56285dbff689bb79$export$2e2bcd8739ae039 = $56285dbff689bb79$var$TableHead;
+var $61ce190e6b4a8993$export$2e2bcd8739ae039 = $61ce190e6b4a8993$var$TableHead;
 
 
-function $55ada0eb9df9d5ef$var$Table({ cellProps: cellProps , rowProps: rowProps , table: table , tableProps: tableProps  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $gXNCa$reactdnd.DndProvider), {
-        backend: (0, $gXNCa$reactdndhtml5backend.HTML5Backend),
-        children: /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("table", {
+function $a61472dcff7c0633$var$Table({ cellProps: cellProps , rowProps: rowProps , table: table , tableProps: tableProps  }) {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)((0, $4MPRY$DndProvider), {
+        backend: (0, $4MPRY$HTML5Backend),
+        children: /*#__PURE__*/ (0, $4MPRY$jsxs)("table", {
             className: "react-table-bs3 table table-condensed table-bordered",
             ...tableProps(table),
             children: [
-                /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $56285dbff689bb79$export$2e2bcd8739ae039), {
+                /*#__PURE__*/ (0, $4MPRY$jsx)((0, $61ce190e6b4a8993$export$2e2bcd8739ae039), {
                     table: table
                 }),
-                /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $189fb20378fd77c6$export$2e2bcd8739ae039), {
+                /*#__PURE__*/ (0, $4MPRY$jsx)((0, $8f7210c3d51ef797$export$2e2bcd8739ae039), {
                     table: table,
                     cellProps: cellProps,
                     rowProps: rowProps
@@ -767,25 +654,22 @@ function $55ada0eb9df9d5ef$var$Table({ cellProps: cellProps , rowProps: rowProps
         })
     });
 }
-$55ada0eb9df9d5ef$var$Table.propTypes = {
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $55ada0eb9df9d5ef$export$2e2bcd8739ae039 = $55ada0eb9df9d5ef$var$Table;
+var $a61472dcff7c0633$export$2e2bcd8739ae039 = $a61472dcff7c0633$var$Table;
 
 
-function $897ab80ac9cafe91$var$DataTableView({ cellProps: cellProps , loading: loading , loadingOffset: loadingOffset , rowProps: rowProps , table: table , tableProps: tableProps , viewRef: viewRef  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)("div", {
+function $f4f3291dfd202833$var$DataTableView({ cellProps: cellProps , loading: loading , loadingOffset: loadingOffset , rowProps: rowProps , table: table , tableProps: tableProps , viewRef: viewRef  }) {
+    return /*#__PURE__*/ (0, $4MPRY$jsxs)("div", {
         ref: viewRef,
         style: {
             overflowX: loading ? "hidden" : "auto",
             position: "relative"
         },
         children: [
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $13ef7f0473e481e2$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $4MPRY$jsx)((0, $a79c5d361a825d07$export$2e2bcd8739ae039), {
                 loading: loading,
                 loadingOffset: loadingOffset
             }),
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $55ada0eb9df9d5ef$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $4MPRY$jsx)((0, $a61472dcff7c0633$export$2e2bcd8739ae039), {
                 cellProps: cellProps,
                 rowProps: rowProps,
                 table: table,
@@ -794,46 +678,36 @@ function $897ab80ac9cafe91$var$DataTableView({ cellProps: cellProps , loading: l
         ]
     });
 }
-$897ab80ac9cafe91$var$DataTableView.propTypes = {
-    viewRef: (0, ($parcel$interopDefault($gXNCa$proptypes))).object,
-    loading: (0, ($parcel$interopDefault($gXNCa$proptypes))).bool,
-    loadingOffset: (0, ($parcel$interopDefault($gXNCa$proptypes))).number,
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired
-};
-var $897ab80ac9cafe91$export$2e2bcd8739ae039 = $897ab80ac9cafe91$var$DataTableView;
+var $f4f3291dfd202833$export$2e2bcd8739ae039 = $f4f3291dfd202833$var$DataTableView;
 
 
 
 
-
-function $c1dc35055a36ee94$var$GroupingButton({ row: row  }) {
-    return /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("button", {
+function $df0bbfd326ffd1b6$var$GroupingButton({ row: row  }) {
+    return /*#__PURE__*/ (0, $4MPRY$jsx)("button", {
         type: "button",
         onClick: row.getToggleExpandedHandler(),
         className: "btn btn-default",
         style: {
             cursor: "pointer"
         },
-        children: row.getIsExpanded() ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+        children: row.getIsExpanded() ? /*#__PURE__*/ (0, $4MPRY$jsx)("span", {
             className: "glyphicon glyphicon-remove-sign",
             "aria-hidden": "true"
-        }) : /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)("span", {
+        }) : /*#__PURE__*/ (0, $4MPRY$jsx)("span", {
             className: "glyphicon glyphicon-duplicate",
             "aria-hidden": "true"
         })
     });
 }
-$c1dc35055a36ee94$var$GroupingButton.propTypes = {
-    row: (0, ($parcel$interopDefault($gXNCa$proptypes))).object
-};
-var $c1dc35055a36ee94$export$2e2bcd8739ae039 = $c1dc35055a36ee94$var$GroupingButton;
+var $df0bbfd326ffd1b6$export$2e2bcd8739ae039 = $df0bbfd326ffd1b6$var$GroupingButton;
 
 
 
-function $4fa36e821943b400$var$BootstrapTable({ cellProps: cellProps = ()=>{} , loading: loading , loadingOffset: loadingOffset , requestedPage: requestedPage , rowProps: rowProps = ()=>{} , setRequestedPage: setRequestedPage , table: table , tableProps: tableProps = ()=>{} , viewRef: viewRef  }) {
-    return table ? /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsxs)((0, $gXNCa$reactjsxruntime.Fragment), {
+function $090815f5086f7f29$var$BootstrapTable({ cellProps: cellProps = ()=>{} , loading: loading , loadingOffset: loadingOffset , requestedPage: requestedPage , rowProps: rowProps = ()=>{} , setRequestedPage: setRequestedPage , table: table , tableProps: tableProps = ()=>{} , viewRef: viewRef  }) {
+    return table ? /*#__PURE__*/ (0, $4MPRY$jsxs)((0, $4MPRY$Fragment), {
         children: [
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $897ab80ac9cafe91$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $4MPRY$jsx)((0, $f4f3291dfd202833$export$2e2bcd8739ae039), {
                 cellProps: cellProps,
                 loading: loading,
                 loadingOffset: loadingOffset,
@@ -842,7 +716,7 @@ function $4fa36e821943b400$var$BootstrapTable({ cellProps: cellProps = ()=>{} , 
                 tableProps: tableProps,
                 viewRef: viewRef
             }),
-            /*#__PURE__*/ (0, $gXNCa$reactjsxruntime.jsx)((0, $00fb4e70fc0faafb$export$2e2bcd8739ae039), {
+            /*#__PURE__*/ (0, $4MPRY$jsx)((0, $4aa40443a491d05e$export$2e2bcd8739ae039), {
                 loading: loading,
                 requestedPage: requestedPage,
                 setRequestedPage: setRequestedPage,
@@ -851,15 +725,8 @@ function $4fa36e821943b400$var$BootstrapTable({ cellProps: cellProps = ()=>{} , 
         ]
     }) : null;
 }
-$4fa36e821943b400$var$BootstrapTable.propTypes = {
-    loading: (0, ($parcel$interopDefault($gXNCa$proptypes))).bool,
-    loadingOffset: (0, ($parcel$interopDefault($gXNCa$proptypes))).number,
-    requestedPage: (0, ($parcel$interopDefault($gXNCa$proptypes))).number,
-    setRequestedPage: (0, ($parcel$interopDefault($gXNCa$proptypes))).func,
-    table: (0, ($parcel$interopDefault($gXNCa$proptypes))).object.isRequired,
-    viewRef: (0, ($parcel$interopDefault($gXNCa$proptypes))).object
-};
-var $4fa36e821943b400$export$2e2bcd8739ae039 = $4fa36e821943b400$var$BootstrapTable;
+var $090815f5086f7f29$export$2e2bcd8739ae039 = $090815f5086f7f29$var$BootstrapTable;
 
 
+export {$090815f5086f7f29$export$2e2bcd8739ae039 as default, $df0bbfd326ffd1b6$export$2e2bcd8739ae039 as GroupingButton, $76592b60f149be3e$export$9d9ea8dbe2f59d9a as tableFilter, $76592b60f149be3e$export$95551f3ba34233a8 as valueFilter};
 //# sourceMappingURL=main.js.map

@@ -3,17 +3,21 @@ import { Header, RowData } from "@tanstack/table-core";
 import Filter from "./Filter";
 
 interface GroupedHeaderProps<T extends RowData> {
+  filtering?: boolean;
+  grouping?: boolean;
   header: Header<T, unknown>;
 }
 
 function GroupedHeader<T extends RowData>({
+  filtering,
+  grouping,
   header,
 }: GroupedHeaderProps<T>): JSX.Element {
   const { column } = header;
   return (
     <>
-      <Filter column={column} />
-      {column.getCanGroup() ? (
+      {filtering && <Filter column={column} />}
+      {grouping && column.getCanGroup() ? (
         <span className="input-group-btn">
           <button
             type="button"

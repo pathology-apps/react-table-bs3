@@ -4,15 +4,37 @@ import FilteredHeaderRow from "./FilteredHeaderRow";
 import HeaderRow from "./HeaderRow";
 
 interface HeaderGroupProps<T> {
+  filtering?: boolean;
+  grouping?: boolean;
   headerGroup: CoreHeaderGroup<T>;
+  pinning?: boolean;
+  sorting?: boolean;
   table: Table<T>;
 }
 
-function HeaderGroup<T>({ headerGroup, table }: HeaderGroupProps<T>) {
+function HeaderGroup<T>({
+  filtering,
+  grouping,
+  headerGroup,
+  pinning,
+  sorting,
+  table,
+}: HeaderGroupProps<T>) {
   return (
     <>
-      <HeaderRow headerGroup={headerGroup} table={table} />
-      <FilteredHeaderRow headerGroup={headerGroup} />
+      <HeaderRow
+        headerGroup={headerGroup}
+        pinning={pinning}
+        sorting={sorting}
+        table={table}
+      />
+      {(filtering || grouping) && (
+        <FilteredHeaderRow
+          filtering={filtering}
+          grouping={grouping}
+          headerGroup={headerGroup}
+        />
+      )}
     </>
   );
 }

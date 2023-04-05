@@ -6,11 +6,16 @@ import DataTableView from "./DataTableView";
 import GroupingButton from "./GroupingButton";
 import "./index.css";
 
-interface BootstrapTableProps<T extends RowData> {
+export interface BootstrapTableProps<T extends RowData> {
   cellProps?: (
     cell: Cell<T, unknown>,
     row: Row<T>
   ) => HTMLAttributes<HTMLTableCellElement>;
+  // Allow user to disable pinning, sorting, filtering, and grouping:
+  pinning?: boolean;
+  sorting?: boolean;
+  filtering?: boolean;
+  grouping?: boolean;
   loading?: boolean;
   loadingOffset?: number;
   requestedPage?: number;
@@ -23,11 +28,15 @@ interface BootstrapTableProps<T extends RowData> {
 
 function BootstrapTable<T extends RowData>({
   cellProps,
+  filtering = true,
+  grouping = true,
   loading,
   loadingOffset,
+  pinning = true,
   requestedPage,
   rowProps,
   setRequestedPage,
+  sorting = true,
   table,
   tableProps,
   viewRef,
@@ -36,9 +45,13 @@ function BootstrapTable<T extends RowData>({
     <>
       <DataTableView
         cellProps={cellProps}
+        filtering={filtering}
+        grouping={grouping}
         loading={loading}
         loadingOffset={loadingOffset}
+        pinning={pinning}
         rowProps={rowProps}
+        sorting={sorting}
         table={table}
         tableProps={tableProps}
         viewRef={viewRef}

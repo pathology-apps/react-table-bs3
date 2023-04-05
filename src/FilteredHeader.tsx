@@ -3,18 +3,26 @@ import GroupedHeader from "./GroupedHeader";
 import { Header, RowData } from "@tanstack/table-core";
 
 interface FilteredHeaderProps<T extends RowData> {
+  filtering?: boolean;
+  grouping?: boolean;
   header: Header<T, unknown>;
 }
 
 function FilteredHeader<T extends RowData>({
+  filtering,
+  grouping,
   header,
 }: FilteredHeaderProps<T>): JSX.Element {
-  return header.column.getCanGroup() ? (
+  return grouping && header.column.getCanGroup() ? (
     <div className="input-group">
-      <GroupedHeader header={header} />
+      <GroupedHeader
+        filtering={filtering}
+        grouping={grouping}
+        header={header}
+      />
     </div>
   ) : (
-    <GroupedHeader header={header} />
+    <GroupedHeader filtering={filtering} grouping={grouping} header={header} />
   );
 }
 

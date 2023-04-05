@@ -8161,11 +8161,11 @@ function Filter({ column, }) {
         }, list: `${column.id}_list` }));
 }
 
-function GroupedHeader({ header, }) {
+function GroupedHeader({ filtering, grouping, header, }) {
     const { column } = header;
     return (React.createElement(React.Fragment, null,
-        React.createElement(Filter, { column: column }),
-        column.getCanGroup() ? (React.createElement("span", { className: "input-group-btn" },
+        filtering && React.createElement(Filter, { column: column }),
+        grouping && column.getCanGroup() ? (React.createElement("span", { className: "input-group-btn" },
             React.createElement("button", Object.assign({ type: "button" }, {
                 className: "btn btn-default",
                 onClick: column.getToggleGroupingHandler(),
@@ -8175,12 +8175,12 @@ function GroupedHeader({ header, }) {
             }), column.getIsGrouped() ? (React.createElement("span", { className: "glyphicon glyphicon-remove-sign", "aria-hidden": "true" })) : (React.createElement("span", { className: "glyphicon glyphicon-duplicate", "aria-hidden": "true" }))))) : null));
 }
 
-function FilteredHeader({ header, }) {
-    return header.column.getCanGroup() ? (React.createElement("div", { className: "input-group" },
-        React.createElement(GroupedHeader, { header: header }))) : (React.createElement(GroupedHeader, { header: header }));
+function FilteredHeader({ filtering, grouping, header, }) {
+    return grouping && header.column.getCanGroup() ? (React.createElement("div", { className: "input-group" },
+        React.createElement(GroupedHeader, { filtering: filtering, grouping: grouping, header: header }))) : (React.createElement(GroupedHeader, { filtering: filtering, grouping: grouping, header: header }));
 }
 
-function FilteredHeaderCell({ header, }) {
+function FilteredHeaderCell({ filtering, grouping, header, }) {
     return (React.createElement("th", Object.assign({}, {
         colSpan: header.colSpan,
         style: {
@@ -8189,11 +8189,11 @@ function FilteredHeaderCell({ header, }) {
             wordWrap: "break-word",
             position: "relative",
         },
-    }), header.column.getCanFilter() ? (React.createElement(FilteredHeader, { header: header })) : null));
+    }), header.column.getCanFilter() ? (React.createElement(FilteredHeader, { filtering: filtering, grouping: grouping, header: header })) : null));
 }
 
-function FilteredHeaderRow({ headerGroup, }) {
-    return (React.createElement("tr", { key: `${headerGroup.id}_filter` }, headerGroup.headers.map((header) => (React.createElement(FilteredHeaderCell, { key: `${header.id}_filterCell`, header: header })))));
+function FilteredHeaderRow({ filtering, grouping, headerGroup, }) {
+    return (React.createElement("tr", { key: `${headerGroup.id}_filter` }, headerGroup.headers.map((header) => (React.createElement(FilteredHeaderCell, { filtering: filtering, grouping: grouping, header: header, key: `${header.id}_filterCell` })))));
 }
 
 function Unpin({ header }) {
@@ -8210,7 +8210,7 @@ const reorderColumn = (draggedColumnId, targetColumnId, columnOrder) => {
     columnOrder.splice(columnOrder.indexOf(targetColumnId), 0, columnOrder.splice(columnOrder.indexOf(draggedColumnId), 1)[0]);
     return [...columnOrder];
 };
-function HeaderTools({ children, header, table }) {
+function HeaderTools({ children, header, pinning, table, }) {
     const { getState, setColumnOrder } = table;
     const { columnOrder } = getState();
     const { column } = header;
@@ -8228,6 +8228,17 @@ function HeaderTools({ children, header, table }) {
         item: () => column,
         type: "column",
     });
+    const renderPin = (column, header, position) => {
+        if (!pinning)
+            return null;
+        return column.getIsPinned() !== position ? (React.createElement("button", { className: "btn btn-link btn-xs", style: {
+                color: "#ddd",
+            }, onClick: e => {
+                e.stopPropagation();
+                column.pin(position);
+            } },
+            React.createElement("span", { className: `glyphicon glyphicon-chevron-${position}`, "aria-hidden": "true" }))) : (React.createElement(Unpin, { header: header }));
+    };
     return (React.createElement("div", { ref: dragRef },
         React.createElement("div", { ref: dropRef, style: { opacity: isDragging ? 0.5 : 1, width: "100%" }, key: `${header.id} _headerCellPin` },
             React.createElement("div", { style: {
@@ -8235,39 +8246,27 @@ function HeaderTools({ children, header, table }) {
                     justifyContent: "space-between",
                     overflow: "hidden",
                 }, ref: previewRef }, !header.isPlaceholder && column.getCanPin() && (React.createElement(React.Fragment, null,
-                column.getIsPinned() !== "left" ? (React.createElement("button", { className: "btn btn-link btn-xs", style: {
-                        color: "#ddd",
-                    }, onClick: e => {
-                        e.stopPropagation();
-                        column.pin("left");
-                    } },
-                    React.createElement("span", { className: "glyphicon glyphicon-chevron-left", "aria-hidden": "true" }))) : (React.createElement(Unpin, { header: header })),
+                renderPin(column, header, "left"),
                 children,
-                column.getIsPinned() !== "right" ? (React.createElement("button", { className: "btn btn-link btn-xs", style: {
-                        color: "#ddd",
-                    }, onClick: e => {
-                        e.stopPropagation();
-                        column.pin("right");
-                    } },
-                    React.createElement("span", { className: "glyphicon glyphicon-chevron-right", "aria-hidden": "true" }))) : (React.createElement(Unpin, { header: header }))))))));
+                renderPin(column, header, "right")))))));
 }
 
-function HeaderCell({ header, table }) {
-    const className = `${header.column.getIsSorted()} sortable`;
+function HeaderCell({ header, pinning, sorting, table, }) {
+    const className = sorting ? `${header.column.getIsSorted()} sortable` : "";
     return (React.createElement("th", Object.assign({}, {
         colSpan: header.colSpan,
-        className: header.column.getCanSort() ? className : undefined,
+        className: sorting && header.column.getCanSort() ? className : undefined,
         style: {
             width: header.getSize(),
             maxWidth: header.getSize(),
             wordWrap: "break-word",
             position: "relative",
         },
-        onClick: header.column.getCanSort()
+        onClick: sorting && header.column.getCanSort()
             ? header.column.getToggleSortingHandler()
             : undefined,
     }),
-        React.createElement(HeaderTools, { key: `${header.id}_headerTools`, table: table, header: header }, header.isPlaceholder
+        React.createElement(HeaderTools, { header: header, key: `${header.id}_headerTools`, pinning: pinning, table: table }, header.isPlaceholder
             ? null
             : flexRender(header.column.columnDef.header, header.getContext())),
         React.createElement("div", Object.assign({}, {
@@ -8278,35 +8277,35 @@ function HeaderCell({ header, table }) {
         }))));
 }
 
-function HeaderRow({ headerGroup, table, }) {
-    return (React.createElement("tr", null, headerGroup.headers.map((header) => (React.createElement(HeaderCell, { key: `${header.id}_headerCell`, table: table, header: header })))));
+function HeaderRow({ headerGroup, pinning, sorting, table, }) {
+    return (React.createElement("tr", null, headerGroup.headers.map((header) => (React.createElement(HeaderCell, { header: header, key: `${header.id}_headerCell`, pinning: pinning, sorting: sorting, table: table })))));
 }
 
-function HeaderGroup({ headerGroup, table }) {
+function HeaderGroup({ filtering, grouping, headerGroup, pinning, sorting, table, }) {
     return (React.createElement(React.Fragment, null,
-        React.createElement(HeaderRow, { headerGroup: headerGroup, table: table }),
-        React.createElement(FilteredHeaderRow, { headerGroup: headerGroup })));
+        React.createElement(HeaderRow, { headerGroup: headerGroup, pinning: pinning, sorting: sorting, table: table }),
+        (filtering || grouping) && (React.createElement(FilteredHeaderRow, { filtering: filtering, grouping: grouping, headerGroup: headerGroup }))));
 }
 
-function TableHead({ table }) {
-    return (React.createElement("thead", null, table.getHeaderGroups().map(headerGroup => (React.createElement(HeaderGroup, { key: headerGroup.id, headerGroup: headerGroup, table: table })))));
+function TableHead({ filtering, grouping, pinning, sorting, table, }) {
+    return (React.createElement("thead", null, table.getHeaderGroups().map(headerGroup => (React.createElement(HeaderGroup, { filtering: filtering, grouping: grouping, headerGroup: headerGroup, key: headerGroup.id, pinning: pinning, sorting: sorting, table: table })))));
 }
 
-function TableComponent({ cellProps, rowProps, table, tableProps, }) {
+function TableComponent({ cellProps, filtering, grouping, pinning, rowProps, sorting, table, tableProps, }) {
     var _a;
     return (React.createElement(DndProvider, { backend: HTML5Backend },
         React.createElement("table", Object.assign({}, Object.assign({ className: "react-table-bs3 table table-condensed table-bordered" }, ((_a = tableProps === null || tableProps === void 0 ? void 0 : tableProps(table)) !== null && _a !== void 0 ? _a : {}))),
-            React.createElement(TableHead, { table: table }),
+            React.createElement(TableHead, { filtering: filtering, grouping: grouping, pinning: pinning, sorting: sorting, table: table }),
             React.createElement(TableBody, { table: table, cellProps: cellProps, rowProps: rowProps }))));
 }
 
-function DataTableView({ cellProps, loading, loadingOffset, rowProps, table, tableProps, viewRef, }) {
+function DataTableView({ cellProps, filtering, grouping, loading, loadingOffset, pinning, rowProps, sorting, table, tableProps, viewRef, }) {
     return (React.createElement("div", { ref: viewRef, style: {
             overflowX: loading ? "hidden" : "auto",
             position: "relative",
         } },
         React.createElement(LoadingScreen, { loading: loading, loadingOffset: loadingOffset }),
-        React.createElement(TableComponent, { cellProps: cellProps, rowProps: rowProps, table: table, tableProps: tableProps })));
+        React.createElement(TableComponent, { cellProps: cellProps, filtering: filtering, grouping: grouping, pinning: pinning, rowProps: rowProps, sorting: sorting, table: table, tableProps: tableProps })));
 }
 
 function GroupingButton({ row, }) {
@@ -8347,9 +8346,9 @@ function styleInject(css, ref) {
 var css_248z = ".react-table-bs3 {\n    table-layout: fixed;\n    width: 100%;\n}\n\n.react-table-bs3 tr {\n    width: -moz-fit-content;\n    width: fit-content;\n}\n\n.react-table-bs3 > thead > th,\n.react-table-bs3 > tbody > td {\n    border-collapse: collapse;\n    padding: 0.25rem;\n}\n\n.react-table-bs3 > thead > th {\n    border-collapse: collapse;\n    padding: 2px 4px;\n    font-weight: bold;\n    text-align: center;\n    height: 30px;\n    width: 100px;\n    white-space: nowrap;\n}\n\n.react-table-bs3 td {\n    height: 30px;\n    overflow: hidden;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n}\n\n.resizer {\n    position: absolute;\n    top: 0;\n    right: 0; /* Set right to 0 to position the resizing handle inside the table */\n    bottom: 0;\n    width: 5px;\n    cursor: col-resize;\n    z-index: 1;\n    background-color: transparent;\n}\n\n.resizer.isResizing {\n    background: linear-gradient(to right, rgba(0, 0, 0, 0) 0%, rgba(217, 255, 0, 0.8) 100%);\n    opacity: 1;\n}\n\n@media (hover: hover) {\n    .resizer {\n        opacity: 0;\n    }\n\n    *:hover>.resizer {\n        opacity: 1;\n    }\n}\n\n.loading {\n    z-index: 2000;\n    position: absolute;\n    display: flex;\n    visibility: hidden;\n    width: 100%;\n    height: 100%;\n    top: 0px;\n    left: 0px;\n    min-height: 500px;\n    align-items: center;\n    justify-content: center;\n    font-size: 2em;\n    color: rgb(255, 255, 255);\n}\n.loading.progress {\n    visibility: visible;\n    text-shadow: rgba(0, 0, 0, 0.3) 1px 1px;\n    background: rgba(0, 0, 0, 0.75);\n    border-radius: 5px;\n    transition: all .4s;\n}\n\n.one {\n    opacity: 0;\n    -webkit-animation: dot 1.3s infinite;\n    -webkit-animation-delay: 0.0s;\n    animation: dot 1.3s infinite;\n    animation-delay: 0.0s;\n}\n\n.two {\n    opacity: 0;\n    -webkit-animation: dot 1.3s infinite;\n    -webkit-animation-delay: 0.2s;\n    animation: dot 1.3s infinite;\n    animation-delay: 0.2s;\n}\n\n.three {\n    opacity: 0;\n    -webkit-animation: dot 1.3s infinite;\n    -webkit-animation-delay: 0.3s;\n    animation: dot 1.3s infinite;\n    animation-delay: 0.3s;\n}\n\n@keyframes dot {\n    0% {\n        opacity: 0;\n    }\n\n    50% {\n        opacity: 0;\n    }\n\n    100% {\n        opacity: 1;\n    }\n}\n\n.sortable {\n    cursor: pointer;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n            user-select: none;\n}\n\nth.desc {\n    box-shadow: inset 0 -3px 0 0 rgb(0,0,0,0.6);\n}\n\nth.asc {\n    box-shadow: inset 0 3px 0 0 rgb(0,0,0,0.6);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbImluZGV4LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQTtJQUNJLG1CQUFtQjtJQUNuQixXQUFXO0FBQ2Y7O0FBRUE7SUFDSSx1QkFBa0I7SUFBbEIsa0JBQWtCO0FBQ3RCOztBQUVBOztJQUVJLHlCQUF5QjtJQUN6QixnQkFBZ0I7QUFDcEI7O0FBRUE7SUFDSSx5QkFBeUI7SUFDekIsZ0JBQWdCO0lBQ2hCLGlCQUFpQjtJQUNqQixrQkFBa0I7SUFDbEIsWUFBWTtJQUNaLFlBQVk7SUFDWixtQkFBbUI7QUFDdkI7O0FBRUE7SUFDSSxZQUFZO0lBQ1osZ0JBQWdCO0lBQ2hCLHVCQUF1QjtJQUN2QixtQkFBbUI7QUFDdkI7O0FBRUE7SUFDSSxrQkFBa0I7SUFDbEIsTUFBTTtJQUNOLFFBQVEsRUFBRSxvRUFBb0U7SUFDOUUsU0FBUztJQUNULFVBQVU7SUFDVixrQkFBa0I7SUFDbEIsVUFBVTtJQUNWLDZCQUE2QjtBQUNqQzs7QUFFQTtJQUNJLHVGQUF1RjtJQUN2RixVQUFVO0FBQ2Q7O0FBRUE7SUFDSTtRQUNJLFVBQVU7SUFDZDs7SUFFQTtRQUNJLFVBQVU7SUFDZDtBQUNKOztBQUVBO0lBQ0ksYUFBYTtJQUNiLGtCQUFrQjtJQUNsQixhQUFhO0lBQ2Isa0JBQWtCO0lBQ2xCLFdBQVc7SUFDWCxZQUFZO0lBQ1osUUFBUTtJQUNSLFNBQVM7SUFDVCxpQkFBaUI7SUFDakIsbUJBQW1CO0lBQ25CLHVCQUF1QjtJQUN2QixjQUFjO0lBQ2QseUJBQXlCO0FBQzdCO0FBQ0E7SUFDSSxtQkFBbUI7SUFDbkIsdUNBQXFDO0lBQ3JDLCtCQUErQjtJQUMvQixrQkFBa0I7SUFDbEIsbUJBQW1CO0FBQ3ZCOztBQUVBO0lBQ0ksVUFBVTtJQUNWLG9DQUFvQztJQUNwQyw2QkFBNkI7SUFDN0IsNEJBQTRCO0lBQzVCLHFCQUFxQjtBQUN6Qjs7QUFFQTtJQUNJLFVBQVU7SUFDVixvQ0FBb0M7SUFDcEMsNkJBQTZCO0lBQzdCLDRCQUE0QjtJQUM1QixxQkFBcUI7QUFDekI7O0FBRUE7SUFDSSxVQUFVO0lBQ1Ysb0NBQW9DO0lBQ3BDLDZCQUE2QjtJQUM3Qiw0QkFBNEI7SUFDNUIscUJBQXFCO0FBQ3pCOztBQUVBO0lBQ0k7UUFDSSxVQUFVO0lBQ2Q7O0lBRUE7UUFDSSxVQUFVO0lBQ2Q7O0lBRUE7UUFDSSxVQUFVO0lBQ2Q7QUFDSjs7QUFFQTtJQUNJLGVBQWU7SUFDZix5QkFBaUI7T0FBakIsc0JBQWlCO1lBQWpCLGlCQUFpQjtBQUNyQjs7QUFFQTtJQUNJLDJDQUEyQztBQUMvQzs7QUFFQTtJQUNJLDBDQUEwQztBQUM5QyIsImZpbGUiOiJpbmRleC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIucmVhY3QtdGFibGUtYnMzIHtcbiAgICB0YWJsZS1sYXlvdXQ6IGZpeGVkO1xuICAgIHdpZHRoOiAxMDAlO1xufVxuXG4ucmVhY3QtdGFibGUtYnMzIHRyIHtcbiAgICB3aWR0aDogZml0LWNvbnRlbnQ7XG59XG5cbi5yZWFjdC10YWJsZS1iczMgPiB0aGVhZCA+IHRoLFxuLnJlYWN0LXRhYmxlLWJzMyA+IHRib2R5ID4gdGQge1xuICAgIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7XG4gICAgcGFkZGluZzogMC4yNXJlbTtcbn1cblxuLnJlYWN0LXRhYmxlLWJzMyA+IHRoZWFkID4gdGgge1xuICAgIGJvcmRlci1jb2xsYXBzZTogY29sbGFwc2U7XG4gICAgcGFkZGluZzogMnB4IDRweDtcbiAgICBmb250LXdlaWdodDogYm9sZDtcbiAgICB0ZXh0LWFsaWduOiBjZW50ZXI7XG4gICAgaGVpZ2h0OiAzMHB4O1xuICAgIHdpZHRoOiAxMDBweDtcbiAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xufVxuXG4ucmVhY3QtdGFibGUtYnMzIHRkIHtcbiAgICBoZWlnaHQ6IDMwcHg7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgICB0ZXh0LW92ZXJmbG93OiBlbGxpcHNpcztcbiAgICB3aGl0ZS1zcGFjZTogbm93cmFwO1xufVxuXG4ucmVzaXplciB7XG4gICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgIHRvcDogMDtcbiAgICByaWdodDogMDsgLyogU2V0IHJpZ2h0IHRvIDAgdG8gcG9zaXRpb24gdGhlIHJlc2l6aW5nIGhhbmRsZSBpbnNpZGUgdGhlIHRhYmxlICovXG4gICAgYm90dG9tOiAwO1xuICAgIHdpZHRoOiA1cHg7XG4gICAgY3Vyc29yOiBjb2wtcmVzaXplO1xuICAgIHotaW5kZXg6IDE7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogdHJhbnNwYXJlbnQ7XG59XG5cbi5yZXNpemVyLmlzUmVzaXppbmcge1xuICAgIGJhY2tncm91bmQ6IGxpbmVhci1ncmFkaWVudCh0byByaWdodCwgcmdiYSgwLCAwLCAwLCAwKSAwJSwgcmdiYSgyMTcsIDI1NSwgMCwgMC44KSAxMDAlKTtcbiAgICBvcGFjaXR5OiAxO1xufVxuXG5AbWVkaWEgKGhvdmVyOiBob3Zlcikge1xuICAgIC5yZXNpemVyIHtcbiAgICAgICAgb3BhY2l0eTogMDtcbiAgICB9XG5cbiAgICAqOmhvdmVyPi5yZXNpemVyIHtcbiAgICAgICAgb3BhY2l0eTogMTtcbiAgICB9XG59XG5cbi5sb2FkaW5nIHtcbiAgICB6LWluZGV4OiAyMDAwO1xuICAgIHBvc2l0aW9uOiBhYnNvbHV0ZTtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIHZpc2liaWxpdHk6IGhpZGRlbjtcbiAgICB3aWR0aDogMTAwJTtcbiAgICBoZWlnaHQ6IDEwMCU7XG4gICAgdG9wOiAwcHg7XG4gICAgbGVmdDogMHB4O1xuICAgIG1pbi1oZWlnaHQ6IDUwMHB4O1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgZm9udC1zaXplOiAyZW07XG4gICAgY29sb3I6IHJnYigyNTUsIDI1NSwgMjU1KTtcbn1cbi5sb2FkaW5nLnByb2dyZXNzIHtcbiAgICB2aXNpYmlsaXR5OiB2aXNpYmxlO1xuICAgIHRleHQtc2hhZG93OiByZ2IoMCAwIDAgLyAzMCUpIDFweCAxcHg7XG4gICAgYmFja2dyb3VuZDogcmdiYSgwLCAwLCAwLCAwLjc1KTtcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XG4gICAgdHJhbnNpdGlvbjogYWxsIC40cztcbn1cblxuLm9uZSB7XG4gICAgb3BhY2l0eTogMDtcbiAgICAtd2Via2l0LWFuaW1hdGlvbjogZG90IDEuM3MgaW5maW5pdGU7XG4gICAgLXdlYmtpdC1hbmltYXRpb24tZGVsYXk6IDAuMHM7XG4gICAgYW5pbWF0aW9uOiBkb3QgMS4zcyBpbmZpbml0ZTtcbiAgICBhbmltYXRpb24tZGVsYXk6IDAuMHM7XG59XG5cbi50d28ge1xuICAgIG9wYWNpdHk6IDA7XG4gICAgLXdlYmtpdC1hbmltYXRpb246IGRvdCAxLjNzIGluZmluaXRlO1xuICAgIC13ZWJraXQtYW5pbWF0aW9uLWRlbGF5OiAwLjJzO1xuICAgIGFuaW1hdGlvbjogZG90IDEuM3MgaW5maW5pdGU7XG4gICAgYW5pbWF0aW9uLWRlbGF5OiAwLjJzO1xufVxuXG4udGhyZWUge1xuICAgIG9wYWNpdHk6IDA7XG4gICAgLXdlYmtpdC1hbmltYXRpb246IGRvdCAxLjNzIGluZmluaXRlO1xuICAgIC13ZWJraXQtYW5pbWF0aW9uLWRlbGF5OiAwLjNzO1xuICAgIGFuaW1hdGlvbjogZG90IDEuM3MgaW5maW5pdGU7XG4gICAgYW5pbWF0aW9uLWRlbGF5OiAwLjNzO1xufVxuXG5Aa2V5ZnJhbWVzIGRvdCB7XG4gICAgMCUge1xuICAgICAgICBvcGFjaXR5OiAwO1xuICAgIH1cblxuICAgIDUwJSB7XG4gICAgICAgIG9wYWNpdHk6IDA7XG4gICAgfVxuXG4gICAgMTAwJSB7XG4gICAgICAgIG9wYWNpdHk6IDE7XG4gICAgfVxufVxuXG4uc29ydGFibGUge1xuICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICB1c2VyLXNlbGVjdDogbm9uZTtcbn1cblxudGguZGVzYyB7XG4gICAgYm94LXNoYWRvdzogaW5zZXQgMCAtM3B4IDAgMCByZ2IoMCwwLDAsMC42KTtcbn1cblxudGguYXNjIHtcbiAgICBib3gtc2hhZG93OiBpbnNldCAwIDNweCAwIDAgcmdiKDAsMCwwLDAuNik7XG59Il19 */";
 styleInject(css_248z);
 
-function BootstrapTable({ cellProps, loading, loadingOffset, requestedPage, rowProps, setRequestedPage, table, tableProps, viewRef, }) {
+function BootstrapTable({ cellProps, filtering = true, grouping = true, loading, loadingOffset, pinning = true, requestedPage, rowProps, setRequestedPage, sorting = true, table, tableProps, viewRef, }) {
     return table ? (React.createElement(React.Fragment, null,
-        React.createElement(DataTableView, { cellProps: cellProps, loading: loading, loadingOffset: loadingOffset, rowProps: rowProps, table: table, tableProps: tableProps, viewRef: viewRef }),
+        React.createElement(DataTableView, { cellProps: cellProps, filtering: filtering, grouping: grouping, loading: loading, loadingOffset: loadingOffset, pinning: pinning, rowProps: rowProps, sorting: sorting, table: table, tableProps: tableProps, viewRef: viewRef }),
         React.createElement(DataFooter, { loading: loading, requestedPage: requestedPage, setRequestedPage: setRequestedPage, table: table }))) : null;
 }
 

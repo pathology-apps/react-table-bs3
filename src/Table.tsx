@@ -10,6 +10,10 @@ interface TableProps<T extends RowData> {
     cell: Cell<T, unknown>,
     row: Row<T>
   ) => HTMLAttributes<HTMLTableCellElement>;
+  pinning?: boolean;
+  sorting?: boolean;
+  filtering?: boolean;
+  grouping?: boolean;
   rowProps?: (row: Row<T>) => HTMLAttributes<HTMLTableRowElement>;
   table: Table<T>;
   tableProps?: (table: Table<T>) => HTMLAttributes<HTMLTableElement>;
@@ -17,7 +21,11 @@ interface TableProps<T extends RowData> {
 
 function TableComponent<T extends RowData>({
   cellProps,
+  filtering,
+  grouping,
+  pinning,
   rowProps,
+  sorting,
   table,
   tableProps,
 }: TableProps<T>) {
@@ -29,7 +37,13 @@ function TableComponent<T extends RowData>({
           ...(tableProps?.(table) ?? {}),
         }}
       >
-        <TableHead table={table} />
+        <TableHead
+          filtering={filtering}
+          grouping={grouping}
+          pinning={pinning}
+          sorting={sorting}
+          table={table}
+        />
         <TableBody table={table} cellProps={cellProps} rowProps={rowProps} />
       </table>
     </DndProvider>

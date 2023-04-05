@@ -3,10 +3,14 @@ import FilteredHeader from "./FilteredHeader";
 import { Header, RowData } from "@tanstack/table-core";
 
 interface FilteredHeaderCellProps<T extends RowData> {
+  filtering?: boolean;
+  grouping?: boolean;
   header: Header<T, unknown>;
 }
 
 function FilteredHeaderCell<T extends RowData>({
+  filtering,
+  grouping,
   header,
 }: FilteredHeaderCellProps<T>) {
   return (
@@ -22,7 +26,11 @@ function FilteredHeaderCell<T extends RowData>({
       }}
     >
       {header.column.getCanFilter() ? (
-        <FilteredHeader<T> header={header} />
+        <FilteredHeader
+          filtering={filtering}
+          grouping={grouping}
+          header={header}
+        />
       ) : null}
     </th>
   );

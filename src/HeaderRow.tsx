@@ -4,20 +4,26 @@ import HeaderCell from "./HeaderCell";
 
 interface HeaderRowProps<T extends RowData> {
   headerGroup: HeaderGroup<T>;
+  pinning?: boolean;
+  sorting?: boolean;
   table: Table<T>;
 }
 
 function HeaderRow<T extends RowData>({
   headerGroup,
+  pinning,
+  sorting,
   table,
 }: HeaderRowProps<T>) {
   return (
     <tr>
       {headerGroup.headers.map((header: Header<T, unknown>) => (
         <HeaderCell
-          key={`${header.id}_headerCell`}
-          table={table}
           header={header}
+          key={`${header.id}_headerCell`}
+          pinning={pinning}
+          sorting={sorting}
+          table={table}
         />
       ))}
     </tr>

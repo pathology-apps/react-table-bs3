@@ -3,8 +3,12 @@ import { Table, RowData, Cell, Row } from "@tanstack/table-core";
 import { tableFilter, valueFilter } from "./Filters/index";
 import GroupingButton from "./GroupingButton";
 import "./index.css";
-interface BootstrapTableProps<T extends RowData> {
+export interface BootstrapTableProps<T extends RowData> {
     cellProps?: (cell: Cell<T, unknown>, row: Row<T>) => HTMLAttributes<HTMLTableCellElement>;
+    pinning?: boolean;
+    sorting?: boolean;
+    filtering?: boolean;
+    grouping?: boolean;
     loading?: boolean;
     loadingOffset?: number;
     requestedPage?: number;
@@ -14,5 +18,5 @@ interface BootstrapTableProps<T extends RowData> {
     tableProps?: (tableInstance: Table<T>) => HTMLAttributes<HTMLTableElement>;
     viewRef?: RefObject<HTMLDivElement>;
 }
-declare function BootstrapTable<T extends RowData>({ cellProps, loading, loadingOffset, requestedPage, rowProps, setRequestedPage, table, tableProps, viewRef, }: BootstrapTableProps<T>): JSX.Element | null;
+declare function BootstrapTable<T extends RowData>({ cellProps, filtering, grouping, loading, loadingOffset, pinning, requestedPage, rowProps, setRequestedPage, sorting, table, tableProps, viewRef, }: BootstrapTableProps<T>): JSX.Element | null;
 export { BootstrapTable, GroupingButton, tableFilter, valueFilter };

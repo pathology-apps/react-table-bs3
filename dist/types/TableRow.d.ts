@@ -1,5 +1,5 @@
 import { HTMLAttributes } from "react";
-import { Row, Cell, RowData } from "@tanstack/react-table";
+import { Row, Cell, RowData } from "@tanstack/table-core";
 interface TableRowProps<T extends RowData> {
     cellProps?: (cell: Cell<T, unknown>, row: Row<T>) => HTMLAttributes<HTMLTableCellElement>;
     row: Row<T>;

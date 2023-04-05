@@ -1,5 +1,5 @@
 import React, { HTMLAttributes } from "react";
-import { Row, Cell, RowData } from "@tanstack/react-table";
+import { Row, Cell, RowData } from "@tanstack/table-core";
 import TableCell from "./TableCell";
 
 interface TableRowProps<T extends RowData> {

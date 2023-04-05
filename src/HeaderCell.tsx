@@ -5,32 +5,42 @@ import { Table, Header } from "@tanstack/table-core";
 
 interface HeaderCellProps<T> {
   header: Header<T, unknown>;
+  pinning?: boolean;
+  sorting?: boolean;
   table: Table<T>;
 }
 
-function HeaderCell<T>({ header, table }: HeaderCellProps<T>) {
-  const className = `${header.column.getIsSorted()} sortable`;
+function HeaderCell<T>({
+  header,
+  pinning,
+  sorting,
+  table,
+}: HeaderCellProps<T>) {
+  const className = sorting ? `${header.column.getIsSorted()} sortable` : "";
 
   return (
     <th
       {...{
         colSpan: header.colSpan,
-        className: header.column.getCanSort() ? className : undefined,
+        className:
+          sorting && header.column.getCanSort() ? className : undefined,
         style: {
           width: header.getSize(),
           maxWidth: header.getSize(),
           wordWrap: "break-word",
           position: "relative",
         },
-        onClick: header.column.getCanSort()
-          ? header.column.getToggleSortingHandler()
-          : undefined,
+        onClick:
+          sorting && header.column.getCanSort()
+            ? header.column.getToggleSortingHandler()
+            : undefined,
       }}
     >
       <HeaderTools
-        key={`${header.id}_headerTools`}
-        table={table}
         header={header}
+        key={`${header.id}_headerTools`}
+        pinning={pinning}
+        table={table}
       >
         {header.isPlaceholder
           ? null

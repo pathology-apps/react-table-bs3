@@ -1,5 +1,6 @@
 import React from "react";
-import { BootstrapTable } from "..";
+import { Meta, StoryFn } from "@storybook/react";
+import { BootstrapTable, BootstrapTableProps } from "..";
 import {
   getCoreRowModel,
   getExpandedRowModel,
@@ -28,7 +29,9 @@ interface Person {
   active: boolean;
 }
 
-export const Default: React.FC = () => {
+type BootstrapTableStory = StoryFn<BootstrapTableProps<Person>>;
+
+export const Default: BootstrapTableStory = args => {
   const columns: AccessorKeyColumnDef<Person>[] = [
     {
       accessorKey: "id",
@@ -91,6 +94,7 @@ export const Default: React.FC = () => {
       size: 80,
     },
   ];
+
   const table = useReactTable({
     data,
     columns,
@@ -103,9 +107,16 @@ export const Default: React.FC = () => {
     getSortedRowModel: getSortedRowModel(),
   });
 
-  return <BootstrapTable table={table} />;
+  return <BootstrapTable {...args} table={table} />;
 };
 
 export default {
   title: "BootstrapTable",
-};
+  component: BootstrapTable,
+  argTypes: {
+    filtering: { control: "boolean" },
+    sorting: { control: "boolean" },
+    grouping: { control: "boolean" },
+    pinning: { control: "boolean" },
+  },
+} as Meta;

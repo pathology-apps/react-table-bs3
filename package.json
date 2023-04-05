@@ -2,7 +2,7 @@
   "name": "@pathappdev/react-table-bs3",
   "description": "Bootstrap 3 layout for @tanstack/react-table",
   "repository": "github:pathology-apps/react-table-bs3",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "source": "src/index.tsx",
   "main": "dist/index.cjs.js",
   "module": "dist/index.esm.js",

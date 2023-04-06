@@ -162,7 +162,6 @@ function TableCell({ cell, cellProps, row, }) {
             width: cell.column.getSize(),
             maxWidth: cell.column.getSize(),
             wordWrap: "break-word",
-            color: "#444",
         } }, ((_b = cellProps === null || cellProps === void 0 ? void 0 : cellProps(cell, row)) !== null && _b !== void 0 ? _b : {}))), cellRender));
 }
 

@@ -54,7 +54,6 @@ function TableCell<T extends RowData>({
           width: cell.column.getSize(),
           maxWidth: cell.column.getSize(),
           wordWrap: "break-word",
-          color: "#444",
         },
         ...(cellProps?.(cell, row) ?? {}),
       }}

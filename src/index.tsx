@@ -11,16 +11,16 @@ export interface BootstrapTableProps<T extends RowData> {
     cell: Cell<T, unknown>,
     row: Row<T>
   ) => HTMLAttributes<HTMLTableCellElement>;
-  // Allow user to disable pinning, sorting, filtering, and grouping:
-  pinning?: boolean;
-  sorting?: boolean;
   filtering?: boolean;
+  footer?: React.ReactNode | null;
   grouping?: boolean;
   loading?: boolean;
   loadingOffset?: number;
+  pinning?: boolean;
   requestedPage?: number;
   rowProps?: (row: Row<T>) => HTMLAttributes<HTMLTableRowElement>;
   setRequestedPage?: (requestedPage: number) => void;
+  sorting?: boolean;
   table: Table<T>;
   tableProps?: (tableInstance: Table<T>) => HTMLAttributes<HTMLTableElement>;
   viewRef?: RefObject<HTMLDivElement>;
@@ -29,6 +29,7 @@ export interface BootstrapTableProps<T extends RowData> {
 function BootstrapTable<T extends RowData>({
   cellProps,
   filtering = true,
+  footer = undefined,
   grouping = true,
   loading,
   loadingOffset,
@@ -56,12 +57,16 @@ function BootstrapTable<T extends RowData>({
         tableProps={tableProps}
         viewRef={viewRef}
       />
-      <DataFooter
-        loading={loading}
-        requestedPage={requestedPage}
-        setRequestedPage={setRequestedPage}
-        table={table}
-      />
+      {footer === undefined ? (
+        <DataFooter
+          loading={loading}
+          requestedPage={requestedPage}
+          setRequestedPage={setRequestedPage}
+          table={table}
+        />
+      ) : (
+        footer
+      )}
     </>
   ) : null;
 }

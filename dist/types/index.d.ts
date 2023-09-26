@@ -17,7 +17,8 @@ export interface BootstrapTableProps<T extends RowData> {
     sorting?: boolean;
     table: Table<T>;
     tableProps?: (tableInstance: Table<T>) => HTMLAttributes<HTMLTableElement>;
+    tableStyle?: React.CSSProperties;
     viewRef?: RefObject<HTMLDivElement>;
 }
-declare function BootstrapTable<T extends RowData>({ cellProps, filtering, footer, grouping, loading, loadingOffset, pinning, requestedPage, rowProps, setRequestedPage, sorting, table, tableProps, viewRef, }: BootstrapTableProps<T>): JSX.Element | null;
+declare function BootstrapTable<T extends RowData>({ cellProps, filtering, footer, grouping, loading, loadingOffset, pinning, requestedPage, rowProps, setRequestedPage, sorting, table, tableProps, tableStyle, viewRef, }: BootstrapTableProps<T>): JSX.Element | null;
 export { BootstrapTable, GroupingButton, tableFilter, valueFilter };

@@ -19,6 +19,7 @@ interface DataTableViewProps<T extends RowData> {
   tableProps?: (
     tableInstance: ReactTable<T>
   ) => HTMLAttributes<HTMLTableElement>;
+  tableStyle?: React.CSSProperties;
   viewRef?: RefObject<HTMLDivElement>;
 }
 
@@ -33,6 +34,7 @@ function DataTableView<T extends RowData>({
   sorting,
   table,
   tableProps,
+  tableStyle,
   viewRef,
 }: DataTableViewProps<T>): JSX.Element {
   return (
@@ -41,6 +43,7 @@ function DataTableView<T extends RowData>({
       style={{
         overflowX: loading ? "hidden" : "auto",
         position: "relative",
+        ...tableStyle,
       }}
     >
       <LoadingScreen loading={loading} loadingOffset={loadingOffset} />

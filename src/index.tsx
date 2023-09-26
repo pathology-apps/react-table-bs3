@@ -23,6 +23,7 @@ export interface BootstrapTableProps<T extends RowData> {
   sorting?: boolean;
   table: Table<T>;
   tableProps?: (tableInstance: Table<T>) => HTMLAttributes<HTMLTableElement>;
+  tableStyle?: React.CSSProperties;
   viewRef?: RefObject<HTMLDivElement>;
 }
 
@@ -40,6 +41,7 @@ function BootstrapTable<T extends RowData>({
   sorting = true,
   table,
   tableProps,
+  tableStyle,
   viewRef,
 }: BootstrapTableProps<T>): JSX.Element | null {
   return table ? (
@@ -55,6 +57,7 @@ function BootstrapTable<T extends RowData>({
         sorting={sorting}
         table={table}
         tableProps={tableProps}
+        tableStyle={tableStyle}
         viewRef={viewRef}
       />
       {footer === undefined ? (

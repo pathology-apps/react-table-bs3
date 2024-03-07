@@ -35,7 +35,10 @@ function HeaderTools<T>({
   table,
 }: HeaderToolsProps<T>) {
   const { getState, setColumnOrder } = table;
-  const { columnOrder } = getState();
+  let { columnOrder } = getState();
+  if (!columnOrder.length) {
+    columnOrder = table.getAllColumns().map(c => c.id);
+  }
   const { column } = header;
 
   const [, dropRef] = useDrop({

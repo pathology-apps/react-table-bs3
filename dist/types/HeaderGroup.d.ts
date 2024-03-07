@@ -1,4 +1,4 @@
-/// <reference types="react" />
+import React from "react";
 import { Table, HeaderGroup as CoreHeaderGroup } from "@tanstack/table-core";
 interface HeaderGroupProps<T> {
     filtering?: boolean;
@@ -8,5 +8,5 @@ interface HeaderGroupProps<T> {
     sorting?: boolean;
     table: Table<T>;
 }
-declare function HeaderGroup<T>({ filtering, grouping, headerGroup, pinning, sorting, table, }: HeaderGroupProps<T>): JSX.Element;
+declare function HeaderGroup<T>({ filtering, grouping, headerGroup, pinning, sorting, table, }: HeaderGroupProps<T>): React.JSX.Element;
 export default HeaderGroup;

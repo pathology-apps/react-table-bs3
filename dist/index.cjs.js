@@ -1,15 +1,9 @@
 'use strict';
 
-Object.defineProperty(exports, '__esModule', { value: true });
-
 var React = require('react');
 var reactDnd = require('react-dnd');
 var reactDndHtml5Backend = require('react-dnd-html5-backend');
 var reactTable = require('@tanstack/react-table');
-
-function _interopDefaultLegacy (e) { return e && typeof e === 'object' && 'default' in e ? e : { 'default': e }; }
-
-var React__default = /*#__PURE__*/_interopDefaultLegacy(React);
 
 const recursiveFilter = (concern, value) => {
     if (Array.isArray(concern)) {
@@ -56,7 +50,7 @@ const valueFilter = (row, columnId, value) => {
 };
 
 const NextButton = ({ loading = false, table, }) => {
-    return (React__default["default"].createElement("button", { type: "button", className: table.getCanNextPage() && !loading
+    return (React.createElement("button", { type: "button", className: table.getCanNextPage() && !loading
             ? "btn btn-primary btn-block"
             : "btn btn-block disabled", onClick: () => table.getCanNextPage() && table.nextPage() }, "Next"));
 };
@@ -68,10 +62,10 @@ const PageSelector = ({ requestedPage, setRequestedPage, table, }) => {
     React.useEffect(() => {
         setLocalRequestedPage(table.getState().pagination.pageIndex + 1);
     }, [table.getState().pagination.pageIndex]);
-    return (React__default["default"].createElement("span", null,
+    return (React.createElement("span", null,
         "Page",
         " ",
-        React__default["default"].createElement("input", { type: "number", value: finalRequestedPage, onKeyDown: e => {
+        React.createElement("input", { type: "number", value: finalRequestedPage, onKeyDown: e => {
                 if (e.code === "Enter" || e.code === "NumpadEnter") {
                     const page = e.target.value
                         ? Number(e.target.value) - 1
@@ -88,46 +82,46 @@ const PageSelector = ({ requestedPage, setRequestedPage, table, }) => {
 };
 
 const PageSizeSelector = ({ table, }) => {
-    return (React__default["default"].createElement("select", { value: table.getState().pagination.pageSize, style: {
+    return (React.createElement("select", { value: table.getState().pagination.pageSize, style: {
             width: "100px",
         }, onChange: e => {
             table.setPageSize(Number(e.target.value));
-        }, className: "form-control" }, [1, 3, 5, 10, 20, 30, 40, 50].map(pageSize => (React__default["default"].createElement("option", { key: pageSize, value: pageSize },
+        }, className: "form-control" }, [1, 3, 5, 10, 20, 30, 40, 50].map(pageSize => (React.createElement("option", { key: pageSize, value: pageSize },
         pageSize,
         " rows")))));
 };
 
 const PreviousButton = ({ loading = false, table, }) => {
-    return (React__default["default"].createElement("button", { type: "button", className: table.getCanPreviousPage() && !loading
+    return (React.createElement("button", { type: "button", className: table.getCanPreviousPage() && !loading
             ? "btn btn-primary btn-block"
             : "btn btn-block disabled", onClick: () => table.getCanPreviousPage() && table.previousPage() }, "Previous"));
 };
 
 function DataFooter({ loading, requestedPage, setRequestedPage, table, }) {
-    return (React__default["default"].createElement("div", { className: "well well-sm" },
-        React__default["default"].createElement("div", { className: "row" },
-            React__default["default"].createElement("div", { className: "col col-xs-12" },
-                React__default["default"].createElement("div", { style: {
+    return (React.createElement("div", { className: "well well-sm" },
+        React.createElement("div", { className: "row" },
+            React.createElement("div", { className: "col col-xs-12" },
+                React.createElement("div", { style: {
                         display: "flex",
                         gap: ".5em",
                         justifyContent: "space-evenly",
                     } },
-                    React__default["default"].createElement("div", { style: { display: "contents" } },
-                        React__default["default"].createElement(PreviousButton, { table: table, loading: loading })),
-                    React__default["default"].createElement("div", { style: {
+                    React.createElement("div", { style: { display: "contents" } },
+                        React.createElement(PreviousButton, { table: table, loading: loading })),
+                    React.createElement("div", { style: {
                             minWidth: "200px",
                             display: "flex",
                             justifyContent: "center",
                         } },
-                        React__default["default"].createElement(PageSelector, { table: table, requestedPage: requestedPage, setRequestedPage: setRequestedPage })),
-                    React__default["default"].createElement("div", { style: {
+                        React.createElement(PageSelector, { table: table, requestedPage: requestedPage, setRequestedPage: setRequestedPage })),
+                    React.createElement("div", { style: {
                             minWidth: "200px",
                             display: "flex",
                             justifyContent: "center",
                         } },
-                        React__default["default"].createElement(PageSizeSelector, { table: table })),
-                    React__default["default"].createElement("div", { style: { display: "contents" } },
-                        React__default["default"].createElement(NextButton, { table: table, loading: loading })))))));
+                        React.createElement(PageSizeSelector, { table: table })),
+                    React.createElement("div", { style: { display: "contents" } },
+                        React.createElement(NextButton, { table: table, loading: loading })))))));
 }
 
 function LoadingScreen({ loading, loadingOffset, }) {
@@ -135,12 +129,12 @@ function LoadingScreen({ loading, loadingOffset, }) {
         return null;
     }
     const className = `loading ${loading ? "progress" : ""}`;
-    return (React__default["default"].createElement("div", { className: className, style: { left: loadingOffset } },
-        React__default["default"].createElement("span", null,
+    return (React.createElement("div", { className: className, style: { left: loadingOffset } },
+        React.createElement("span", null,
             "Loading",
-            React__default["default"].createElement("span", { className: "one" }, "."),
-            React__default["default"].createElement("span", { className: "two" }, "."),
-            React__default["default"].createElement("span", { className: "three" }, "."))));
+            React.createElement("span", { className: "one" }, "."),
+            React.createElement("span", { className: "two" }, "."),
+            React.createElement("span", { className: "three" }, "."))));
 }
 
 function TableCell({ cell, cellProps, row, }) {
@@ -150,12 +144,10 @@ function TableCell({ cell, cellProps, row, }) {
     let cellRender = reactTable.flexRender(cell.column.columnDef.cell, cell.getContext());
     if (cell.getIsGrouped()) {
         // If it's a grouped cell, add an expander and row count
-        cellRender = (React__default["default"].createElement("button", Object.assign({ type: "button" }, {
-            onClick: row.getToggleExpandedHandler(),
+        cellRender = (React.createElement("button", { type: "button", onClick: row.getToggleExpandedHandler(),
             style: {
                 cursor: row.getCanExpand() ? "pointer" : "normal",
-            },
-        }),
+            } },
             reactTable.flexRender(cell.column.columnDef.cell, cell.getContext()),
             "\u00A0 (",
             row.subRows.length,
@@ -166,25 +158,25 @@ function TableCell({ cell, cellProps, row, }) {
         // renderer for cell
         cellRender = reactTable.flexRender((_a = cell.column.columnDef.aggregatedCell) !== null && _a !== void 0 ? _a : cell.column.columnDef.cell, cell.getContext());
     }
-    return (React__default["default"].createElement("td", Object.assign({}, Object.assign({ style: {
+    return (React.createElement("td", Object.assign({ style: {
             width: cell.column.getSize(),
             maxWidth: cell.column.getSize(),
             wordWrap: "break-word",
-        } }, ((_b = cellProps === null || cellProps === void 0 ? void 0 : cellProps(cell, row)) !== null && _b !== void 0 ? _b : {}))), cellRender));
+        } }, ((_b = cellProps === null || cellProps === void 0 ? void 0 : cellProps(cell, row)) !== null && _b !== void 0 ? _b : {})), cellRender));
 }
 
 function TableRow({ cellProps, row, rowProps, }) {
     var _a;
-    return (React__default["default"].createElement("tr", Object.assign({}, ((_a = rowProps === null || rowProps === void 0 ? void 0 : rowProps(row)) !== null && _a !== void 0 ? _a : {})), row.getVisibleCells().map(cell => (React__default["default"].createElement(TableCell, { key: `${cell.id}_tableCell`, cell: cell, cellProps: cellProps, row: row })))));
+    return (React.createElement("tr", Object.assign({}, ((_a = rowProps === null || rowProps === void 0 ? void 0 : rowProps(row)) !== null && _a !== void 0 ? _a : {})), row.getVisibleCells().map(cell => (React.createElement(TableCell, { key: `${cell.id}_tableCell`, cell: cell, cellProps: cellProps, row: row })))));
 }
 
 function TableBody({ cellProps, rowProps, table, }) {
     var _a;
     const rowModel = table.getRowModel();
     if (!((_a = rowModel === null || rowModel === void 0 ? void 0 : rowModel.rows) === null || _a === void 0 ? void 0 : _a.length)) {
-        return React__default["default"].createElement("tbody", null);
+        return React.createElement("tbody", null);
     }
-    return (React__default["default"].createElement("tbody", null, table.getRowModel().rows.map(row => (React__default["default"].createElement(TableRow, { key: `${row.id}_tableRow`, cellProps: cellProps, row: row, rowProps: rowProps })))));
+    return (React.createElement("tbody", null, table.getRowModel().rows.map(row => (React.createElement(TableRow, { key: `${row.id}_tableRow`, cellProps: cellProps, row: row, rowProps: rowProps })))));
 }
 
 /******************************************************************************
@@ -201,6 +193,8 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
+/* global Reflect, Promise, SuppressedError, Symbol */
+
 
 function __rest(s, e) {
     var t = {};
@@ -214,6 +208,11 @@ function __rest(s, e) {
     return t;
 }
 
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+    var e = new Error(message);
+    return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};
+
 function DebouncedInput(_a) {
     var { debounce = 500, onChange, value: initialValue } = _a, props = __rest(_a, ["debounce", "onChange", "value"]);
     const [value, setValue] = React.useState(initialValue);
@@ -226,7 +225,7 @@ function DebouncedInput(_a) {
         }, debounce);
         return () => clearTimeout(timeout);
     }, [value]);
-    return (React__default["default"].createElement("input", Object.assign({}, props, { value: value, onChange: e => setValue(e.target.value) })));
+    return (React.createElement("input", Object.assign({}, props, { value: value, onChange: e => setValue(e.target.value) })));
 }
 
 function Filter({ column, }) {
@@ -234,7 +233,7 @@ function Filter({ column, }) {
     if (!column.getCanFilter()) {
         return null;
     }
-    return (React__default["default"].createElement(DebouncedInput, { type: "text", value: columnFilterValue !== null && columnFilterValue !== void 0 ? columnFilterValue : "", onChange: value => column.setFilterValue(value), className: "form-control", style: {
+    return (React.createElement(DebouncedInput, { type: "text", value: columnFilterValue !== null && columnFilterValue !== void 0 ? columnFilterValue : "", onChange: value => column.setFilterValue(value), className: "form-control", style: {
             display: "block",
             width: "100%",
         }, list: `${column.id}_list` }));
@@ -242,45 +241,41 @@ function Filter({ column, }) {
 
 function GroupedHeader({ filtering, grouping, header, }) {
     const { column } = header;
-    return (React__default["default"].createElement(React__default["default"].Fragment, null,
-        filtering && React__default["default"].createElement(Filter, { column: column }),
-        grouping && column.getCanGroup() ? (React__default["default"].createElement("span", { className: "input-group-btn" },
-            React__default["default"].createElement("button", Object.assign({ type: "button" }, {
-                className: "btn btn-default",
+    return (React.createElement(React.Fragment, null,
+        filtering && React.createElement(Filter, { column: column }),
+        grouping && column.getCanGroup() ? (React.createElement("span", { className: "input-group-btn" },
+            React.createElement("button", { type: "button", className: "btn btn-default",
                 onClick: column.getToggleGroupingHandler(),
                 style: {
                     cursor: "pointer",
-                },
-            }), column.getIsGrouped() ? (React__default["default"].createElement("span", { className: "glyphicon glyphicon-remove-sign", "aria-hidden": "true" })) : (React__default["default"].createElement("span", { className: "glyphicon glyphicon-duplicate", "aria-hidden": "true" }))))) : null));
+                } }, column.getIsGrouped() ? (React.createElement("span", { className: "glyphicon glyphicon-remove-sign", "aria-hidden": "true" })) : (React.createElement("span", { className: "glyphicon glyphicon-duplicate", "aria-hidden": "true" }))))) : null));
 }
 
 function FilteredHeader({ filtering, grouping, header, }) {
-    return grouping && header.column.getCanGroup() ? (React__default["default"].createElement("div", { className: "input-group" },
-        React__default["default"].createElement(GroupedHeader, { filtering: filtering, grouping: grouping, header: header }))) : (React__default["default"].createElement(GroupedHeader, { filtering: filtering, grouping: grouping, header: header }));
+    return grouping && header.column.getCanGroup() ? (React.createElement("div", { className: "input-group" },
+        React.createElement(GroupedHeader, { filtering: filtering, grouping: grouping, header: header }))) : (React.createElement(GroupedHeader, { filtering: filtering, grouping: grouping, header: header }));
 }
 
 function FilteredHeaderCell({ filtering, grouping, header, }) {
-    return (React__default["default"].createElement("th", Object.assign({}, {
-        colSpan: header.colSpan,
+    return (React.createElement("th", { colSpan: header.colSpan,
         style: {
             width: header.getSize(),
             maxWidth: header.getSize(),
             wordWrap: "break-word",
             position: "relative",
-        },
-    }), header.column.getCanFilter() ? (React__default["default"].createElement(FilteredHeader, { filtering: filtering, grouping: grouping, header: header })) : null));
+        } }, header.column.getCanFilter() ? (React.createElement(FilteredHeader, { filtering: filtering, grouping: grouping, header: header })) : null));
 }
 
 function FilteredHeaderRow({ filtering, grouping, headerGroup, }) {
-    return (React__default["default"].createElement("tr", { key: `${headerGroup.id}_filter` }, headerGroup.headers.map((header) => (React__default["default"].createElement(FilteredHeaderCell, { filtering: filtering, grouping: grouping, header: header, key: `${header.id}_filterCell` })))));
+    return (React.createElement("tr", { key: `${headerGroup.id}_filter` }, headerGroup.headers.map((header) => (React.createElement(FilteredHeaderCell, { filtering: filtering, grouping: grouping, header: header, key: `${header.id}_filterCell` })))));
 }
 
 function Unpin({ header }) {
-    return (React__default["default"].createElement("button", { className: "btn btn-link btn-xs", onClick: e => {
+    return (React.createElement("button", { className: "btn btn-link btn-xs", onClick: e => {
             e.stopPropagation();
             header.column.pin(false);
         } },
-        React__default["default"].createElement("span", { style: {
+        React.createElement("span", { style: {
                 color: "#337ab7",
             }, className: "glyphicon glyphicon-pushpin", "aria-hidden": "true" })));
 }
@@ -291,7 +286,10 @@ const reorderColumn = (draggedColumnId, targetColumnId, columnOrder) => {
 };
 function HeaderTools({ children, header, pinning, table, }) {
     const { getState, setColumnOrder } = table;
-    const { columnOrder } = getState();
+    let { columnOrder } = getState();
+    if (!columnOrder.length) {
+        columnOrder = table.getAllColumns().map(c => c.id);
+    }
     const { column } = header;
     const [, dropRef] = reactDnd.useDrop({
         accept: "column",
@@ -310,21 +308,21 @@ function HeaderTools({ children, header, pinning, table, }) {
     const renderPin = (column, header, position) => {
         if (!pinning)
             return null;
-        return column.getIsPinned() !== position ? (React__default["default"].createElement("button", { className: "btn btn-link btn-xs", style: {
+        return column.getIsPinned() !== position ? (React.createElement("button", { className: "btn btn-link btn-xs", style: {
                 color: "#ddd",
             }, onClick: e => {
                 e.stopPropagation();
                 column.pin(position);
             } },
-            React__default["default"].createElement("span", { className: `glyphicon glyphicon-chevron-${position}`, "aria-hidden": "true" }))) : (React__default["default"].createElement(Unpin, { header: header }));
+            React.createElement("span", { className: `glyphicon glyphicon-chevron-${position}`, "aria-hidden": "true" }))) : (React.createElement(Unpin, { header: header }));
     };
-    return (React__default["default"].createElement("div", { ref: dragRef },
-        React__default["default"].createElement("div", { ref: dropRef, style: { opacity: isDragging ? 0.5 : 1, width: "100%" }, key: `${header.id} _headerCellPin` },
-            React__default["default"].createElement("div", { style: {
+    return (React.createElement("div", { ref: dragRef },
+        React.createElement("div", { ref: dropRef, style: { opacity: isDragging ? 0.5 : 1, width: "100%" }, key: `${header.id} _headerCellPin` },
+            React.createElement("div", { style: {
                     display: "flex",
                     justifyContent: "space-between",
                     overflow: "hidden",
-                }, ref: previewRef }, !header.isPlaceholder && column.getCanPin() && (React__default["default"].createElement(React__default["default"].Fragment, null,
+                }, ref: previewRef }, !header.isPlaceholder && column.getCanPin() && (React.createElement(React.Fragment, null,
                 renderPin(column, header, "left"),
                 children,
                 renderPin(column, header, "right")))))));
@@ -332,8 +330,7 @@ function HeaderTools({ children, header, pinning, table, }) {
 
 function HeaderCell({ header, pinning, sorting, table, }) {
     const className = sorting ? `${header.column.getIsSorted()} sortable` : "";
-    return (React__default["default"].createElement("th", Object.assign({}, {
-        colSpan: header.colSpan,
+    return (React.createElement("th", { colSpan: header.colSpan,
         className: sorting && header.column.getCanSort() ? className : undefined,
         style: {
             width: header.getSize(),
@@ -343,53 +340,48 @@ function HeaderCell({ header, pinning, sorting, table, }) {
         },
         onClick: sorting && header.column.getCanSort()
             ? header.column.getToggleSortingHandler()
-            : undefined,
-    }),
-        React__default["default"].createElement(HeaderTools, { header: header, key: `${header.id}_headerTools`, pinning: pinning, table: table }, header.isPlaceholder
+            : undefined },
+        React.createElement(HeaderTools, { header: header, key: `${header.id}_headerTools`, pinning: pinning, table: table }, header.isPlaceholder
             ? null
             : reactTable.flexRender(header.column.columnDef.header, header.getContext())),
-        React__default["default"].createElement("div", Object.assign({}, {
-            onClick: e => e.stopPropagation(),
+        React.createElement("div", { onClick: e => e.stopPropagation(),
             onMouseDown: header.getResizeHandler(),
             onTouchStart: header.getResizeHandler(),
-            className: `resizer ${header.column.getIsResizing() ? "isResizing" : ""}`,
-        }))));
+            className: `resizer ${header.column.getIsResizing() ? "isResizing" : ""}` })));
 }
 
 function HeaderRow({ headerGroup, pinning, sorting, table, }) {
-    return (React__default["default"].createElement("tr", null, headerGroup.headers.map((header) => (React__default["default"].createElement(HeaderCell, { header: header, key: `${header.id}_headerCell`, pinning: pinning, sorting: sorting, table: table })))));
+    return (React.createElement("tr", null, headerGroup.headers.map((header) => (React.createElement(HeaderCell, { header: header, key: `${header.id}_headerCell`, pinning: pinning, sorting: sorting, table: table })))));
 }
 
 function HeaderGroup({ filtering, grouping, headerGroup, pinning, sorting, table, }) {
-    return (React__default["default"].createElement(React__default["default"].Fragment, null,
-        React__default["default"].createElement(HeaderRow, { headerGroup: headerGroup, pinning: pinning, sorting: sorting, table: table }),
-        (filtering || grouping) && (React__default["default"].createElement(FilteredHeaderRow, { filtering: filtering, grouping: grouping, headerGroup: headerGroup }))));
+    return (React.createElement(React.Fragment, null,
+        React.createElement(HeaderRow, { headerGroup: headerGroup, pinning: pinning, sorting: sorting, table: table }),
+        (filtering || grouping) && (React.createElement(FilteredHeaderRow, { filtering: filtering, grouping: grouping, headerGroup: headerGroup }))));
 }
 
 function TableHead({ filtering, grouping, pinning, sorting, table, }) {
-    return (React__default["default"].createElement("thead", null, table.getHeaderGroups().map(headerGroup => (React__default["default"].createElement(HeaderGroup, { filtering: filtering, grouping: grouping, headerGroup: headerGroup, key: headerGroup.id, pinning: pinning, sorting: sorting, table: table })))));
+    return (React.createElement("thead", null, table.getHeaderGroups().map(headerGroup => (React.createElement(HeaderGroup, { filtering: filtering, grouping: grouping, headerGroup: headerGroup, key: headerGroup.id, pinning: pinning, sorting: sorting, table: table })))));
 }
 
 function TableComponent({ cellProps, filtering, grouping, pinning, rowProps, sorting, table, tableProps, }) {
     var _a;
-    return (React__default["default"].createElement(reactDnd.DndProvider, { backend: reactDndHtml5Backend.HTML5Backend },
-        React__default["default"].createElement("table", Object.assign({}, Object.assign({ className: "react-table-bs3 table table-condensed table-bordered" }, ((_a = tableProps === null || tableProps === void 0 ? void 0 : tableProps(table)) !== null && _a !== void 0 ? _a : {}))),
-            React__default["default"].createElement(TableHead, { filtering: filtering, grouping: grouping, pinning: pinning, sorting: sorting, table: table }),
-            React__default["default"].createElement(TableBody, { table: table, cellProps: cellProps, rowProps: rowProps }))));
+    return (React.createElement(reactDnd.DndProvider, { backend: reactDndHtml5Backend.HTML5Backend },
+        React.createElement("table", Object.assign({ className: "react-table-bs3 table table-condensed table-bordered" }, ((_a = tableProps === null || tableProps === void 0 ? void 0 : tableProps(table)) !== null && _a !== void 0 ? _a : {})),
+            React.createElement(TableHead, { filtering: filtering, grouping: grouping, pinning: pinning, sorting: sorting, table: table }),
+            React.createElement(TableBody, { table: table, cellProps: cellProps, rowProps: rowProps }))));
 }
 
 function DataTableView({ cellProps, filtering, grouping, loading, loadingOffset, pinning, rowProps, sorting, table, tableProps, tableStyle, viewRef, }) {
-    return (React__default["default"].createElement("div", { ref: viewRef, style: Object.assign({ overflowX: loading ? "hidden" : "auto", position: "relative" }, tableStyle) },
-        React__default["default"].createElement(LoadingScreen, { loading: loading, loadingOffset: loadingOffset }),
-        React__default["default"].createElement(TableComponent, { cellProps: cellProps, filtering: filtering, grouping: grouping, pinning: pinning, rowProps: rowProps, sorting: sorting, table: table, tableProps: tableProps })));
+    return (React.createElement("div", { ref: viewRef, style: Object.assign({ overflowX: loading ? "hidden" : "auto", position: "relative" }, tableStyle) },
+        React.createElement(LoadingScreen, { loading: loading, loadingOffset: loadingOffset }),
+        React.createElement(TableComponent, { cellProps: cellProps, filtering: filtering, grouping: grouping, pinning: pinning, rowProps: rowProps, sorting: sorting, table: table, tableProps: tableProps })));
 }
 
 function GroupingButton({ row, }) {
-    return (React__default["default"].createElement("button", Object.assign({ type: "button" }, {
-        onClick: row.getToggleExpandedHandler(),
+    return (React.createElement("button", { type: "button", onClick: row.getToggleExpandedHandler(),
         className: "btn btn-default",
-        style: { cursor: "pointer" },
-    }), row.getIsExpanded() ? (React__default["default"].createElement("span", { className: "glyphicon glyphicon-remove-sign", "aria-hidden": "true" })) : (React__default["default"].createElement("span", { className: "glyphicon glyphicon-duplicate", "aria-hidden": "true" }))));
+        style: { cursor: "pointer" } }, row.getIsExpanded() ? (React.createElement("span", { className: "glyphicon glyphicon-remove-sign", "aria-hidden": "true" })) : (React.createElement("span", { className: "glyphicon glyphicon-duplicate", "aria-hidden": "true" }))));
 }
 
 function styleInject(css, ref) {
@@ -423,9 +415,9 @@ var css_248z = ".react-table-bs3 {\n    table-layout: fixed;\n    width: 100%;\n
 styleInject(css_248z);
 
 function BootstrapTable({ cellProps, filtering = true, footer = undefined, grouping = true, loading, loadingOffset, pinning = true, requestedPage, rowProps, setRequestedPage, sorting = true, table, tableProps, tableStyle, viewRef, }) {
-    return table ? (React__default["default"].createElement(React__default["default"].Fragment, null,
-        React__default["default"].createElement(DataTableView, { cellProps: cellProps, filtering: filtering, grouping: grouping, loading: loading, loadingOffset: loadingOffset, pinning: pinning, rowProps: rowProps, sorting: sorting, table: table, tableProps: tableProps, tableStyle: tableStyle, viewRef: viewRef }),
-        footer === undefined ? (React__default["default"].createElement(DataFooter, { loading: loading, requestedPage: requestedPage, setRequestedPage: setRequestedPage, table: table })) : (footer))) : null;
+    return table ? (React.createElement(React.Fragment, null,
+        React.createElement(DataTableView, { cellProps: cellProps, filtering: filtering, grouping: grouping, loading: loading, loadingOffset: loadingOffset, pinning: pinning, rowProps: rowProps, sorting: sorting, table: table, tableProps: tableProps, tableStyle: tableStyle, viewRef: viewRef }),
+        footer === undefined ? (React.createElement(DataFooter, { loading: loading, requestedPage: requestedPage, setRequestedPage: setRequestedPage, table: table })) : (footer))) : null;
 }
 
 exports.BootstrapTable = BootstrapTable;

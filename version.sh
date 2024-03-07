@@ -1,5 +1,4 @@
 #!/bin/bash
-set -e
 
 # Usage: ./version <major|minor|patch> - Increments the relevant version part by one.
 #
@@ -104,42 +103,38 @@ if ! [[ "$new_version" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
 	exit 1
 fi
 
-# Check for connectivity
-echo "🔒 Checking for network connectivity..."
-server="github.com"
-ping -c1 -W1 $server > /dev/null 2>&1
-if [ $? -ne 0 ]; then
-	echo "===================================================================="
-	echo "GitHub appears to be offline. Please check your network connection. "
-	echo "===================================================================="
-	exit 1;
-fi
-echo "🔑 Network connected."
-
-echo "Building project..."
-docker run --rm -v "$(pwd)":/app -w /app -u $(id -u):$(id -g) -e npm_config_cache=/tmp/.npm node:19 sh -c "npm i && npm run build"
-
 confirm "Bump version number from $current_version to $new_version?"
-new_tag="$new_version"
 bump_files "$current_version" "$new_version"
 
-confirm "Publish $new_tag?"
+confirm "Publish $new_version?"
 
 echo "Syncing remote tags..."
 git config fetch.prune true
 git config fetch.pruneTags true
 git fetch origin
 
-echo "Adding new version tag: $new_tag..."
-git tag "$new_tag"
-git push origin "$new_tag"
-
-echo "Committing changed files..."
+echo "Committing version bump..."
 git add --all
 git commit -m "Bumped version to $new_version"
 
+echo "Adding new version tag: $new_version..."
+git tag "$new_version"
+
+echo "Generating changelog..."
+prior_release=$(jq -r '.priorRelease' package.json)
+git-chglog --output CHANGELOG.md "$prior_release".."$new_version"
+
+echo "Committing changelog..."
+git add CHANGELOG.md
+git commit -m "Updated changelog for $new_version"
+
 current_branch=$(git symbolic-ref --short HEAD)
 
-echo "Pushing branch $current_branch and tag $new_tag upstream..."
-git push --tags origin $current_branch
-git push origin $current_branch
+echo "Pushing branch $current_branch and tag $new_version upstream..."
+git push origin $current_branch --tags
+
+echo "Force-updating the version tag: $new_version..."
+git tag -f "$new_version"
+
+echo "Force-pushing the version tag: $new_version..."
+git push origin -f "$new_version"

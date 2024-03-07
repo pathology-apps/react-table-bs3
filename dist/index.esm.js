@@ -142,12 +142,10 @@ function TableCell({ cell, cellProps, row, }) {
     let cellRender = flexRender(cell.column.columnDef.cell, cell.getContext());
     if (cell.getIsGrouped()) {
         // If it's a grouped cell, add an expander and row count
-        cellRender = (React.createElement("button", Object.assign({ type: "button" }, {
-            onClick: row.getToggleExpandedHandler(),
+        cellRender = (React.createElement("button", { type: "button", onClick: row.getToggleExpandedHandler(),
             style: {
                 cursor: row.getCanExpand() ? "pointer" : "normal",
-            },
-        }),
+            } },
             flexRender(cell.column.columnDef.cell, cell.getContext()),
             "\u00A0 (",
             row.subRows.length,
@@ -158,11 +156,11 @@ function TableCell({ cell, cellProps, row, }) {
         // renderer for cell
         cellRender = flexRender((_a = cell.column.columnDef.aggregatedCell) !== null && _a !== void 0 ? _a : cell.column.columnDef.cell, cell.getContext());
     }
-    return (React.createElement("td", Object.assign({}, Object.assign({ style: {
+    return (React.createElement("td", Object.assign({ style: {
             width: cell.column.getSize(),
             maxWidth: cell.column.getSize(),
             wordWrap: "break-word",
-        } }, ((_b = cellProps === null || cellProps === void 0 ? void 0 : cellProps(cell, row)) !== null && _b !== void 0 ? _b : {}))), cellRender));
+        } }, ((_b = cellProps === null || cellProps === void 0 ? void 0 : cellProps(cell, row)) !== null && _b !== void 0 ? _b : {})), cellRender));
 }
 
 function TableRow({ cellProps, row, rowProps, }) {
@@ -193,6 +191,8 @@ LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR
 OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR
 PERFORMANCE OF THIS SOFTWARE.
 ***************************************************************************** */
+/* global Reflect, Promise, SuppressedError, Symbol */
+
 
 function __rest(s, e) {
     var t = {};
@@ -205,6 +205,11 @@ function __rest(s, e) {
         }
     return t;
 }
+
+typeof SuppressedError === "function" ? SuppressedError : function (error, suppressed, message) {
+    var e = new Error(message);
+    return e.name = "SuppressedError", e.error = error, e.suppressed = suppressed, e;
+};
 
 function DebouncedInput(_a) {
     var { debounce = 500, onChange, value: initialValue } = _a, props = __rest(_a, ["debounce", "onChange", "value"]);
@@ -237,13 +242,11 @@ function GroupedHeader({ filtering, grouping, header, }) {
     return (React.createElement(React.Fragment, null,
         filtering && React.createElement(Filter, { column: column }),
         grouping && column.getCanGroup() ? (React.createElement("span", { className: "input-group-btn" },
-            React.createElement("button", Object.assign({ type: "button" }, {
-                className: "btn btn-default",
+            React.createElement("button", { type: "button", className: "btn btn-default",
                 onClick: column.getToggleGroupingHandler(),
                 style: {
                     cursor: "pointer",
-                },
-            }), column.getIsGrouped() ? (React.createElement("span", { className: "glyphicon glyphicon-remove-sign", "aria-hidden": "true" })) : (React.createElement("span", { className: "glyphicon glyphicon-duplicate", "aria-hidden": "true" }))))) : null));
+                } }, column.getIsGrouped() ? (React.createElement("span", { className: "glyphicon glyphicon-remove-sign", "aria-hidden": "true" })) : (React.createElement("span", { className: "glyphicon glyphicon-duplicate", "aria-hidden": "true" }))))) : null));
 }
 
 function FilteredHeader({ filtering, grouping, header, }) {
@@ -252,15 +255,13 @@ function FilteredHeader({ filtering, grouping, header, }) {
 }
 
 function FilteredHeaderCell({ filtering, grouping, header, }) {
-    return (React.createElement("th", Object.assign({}, {
-        colSpan: header.colSpan,
+    return (React.createElement("th", { colSpan: header.colSpan,
         style: {
             width: header.getSize(),
             maxWidth: header.getSize(),
             wordWrap: "break-word",
             position: "relative",
-        },
-    }), header.column.getCanFilter() ? (React.createElement(FilteredHeader, { filtering: filtering, grouping: grouping, header: header })) : null));
+        } }, header.column.getCanFilter() ? (React.createElement(FilteredHeader, { filtering: filtering, grouping: grouping, header: header })) : null));
 }
 
 function FilteredHeaderRow({ filtering, grouping, headerGroup, }) {
@@ -283,7 +284,10 @@ const reorderColumn = (draggedColumnId, targetColumnId, columnOrder) => {
 };
 function HeaderTools({ children, header, pinning, table, }) {
     const { getState, setColumnOrder } = table;
-    const { columnOrder } = getState();
+    let { columnOrder } = getState();
+    if (!columnOrder.length) {
+        columnOrder = table.getAllColumns().map(c => c.id);
+    }
     const { column } = header;
     const [, dropRef] = useDrop({
         accept: "column",
@@ -324,8 +328,7 @@ function HeaderTools({ children, header, pinning, table, }) {
 
 function HeaderCell({ header, pinning, sorting, table, }) {
     const className = sorting ? `${header.column.getIsSorted()} sortable` : "";
-    return (React.createElement("th", Object.assign({}, {
-        colSpan: header.colSpan,
+    return (React.createElement("th", { colSpan: header.colSpan,
         className: sorting && header.column.getCanSort() ? className : undefined,
         style: {
             width: header.getSize(),
@@ -335,17 +338,14 @@ function HeaderCell({ header, pinning, sorting, table, }) {
         },
         onClick: sorting && header.column.getCanSort()
             ? header.column.getToggleSortingHandler()
-            : undefined,
-    }),
+            : undefined },
         React.createElement(HeaderTools, { header: header, key: `${header.id}_headerTools`, pinning: pinning, table: table }, header.isPlaceholder
             ? null
             : flexRender(header.column.columnDef.header, header.getContext())),
-        React.createElement("div", Object.assign({}, {
-            onClick: e => e.stopPropagation(),
+        React.createElement("div", { onClick: e => e.stopPropagation(),
             onMouseDown: header.getResizeHandler(),
             onTouchStart: header.getResizeHandler(),
-            className: `resizer ${header.column.getIsResizing() ? "isResizing" : ""}`,
-        }))));
+            className: `resizer ${header.column.getIsResizing() ? "isResizing" : ""}` })));
 }
 
 function HeaderRow({ headerGroup, pinning, sorting, table, }) {
@@ -365,7 +365,7 @@ function TableHead({ filtering, grouping, pinning, sorting, table, }) {
 function TableComponent({ cellProps, filtering, grouping, pinning, rowProps, sorting, table, tableProps, }) {
     var _a;
     return (React.createElement(DndProvider, { backend: HTML5Backend },
-        React.createElement("table", Object.assign({}, Object.assign({ className: "react-table-bs3 table table-condensed table-bordered" }, ((_a = tableProps === null || tableProps === void 0 ? void 0 : tableProps(table)) !== null && _a !== void 0 ? _a : {}))),
+        React.createElement("table", Object.assign({ className: "react-table-bs3 table table-condensed table-bordered" }, ((_a = tableProps === null || tableProps === void 0 ? void 0 : tableProps(table)) !== null && _a !== void 0 ? _a : {})),
             React.createElement(TableHead, { filtering: filtering, grouping: grouping, pinning: pinning, sorting: sorting, table: table }),
             React.createElement(TableBody, { table: table, cellProps: cellProps, rowProps: rowProps }))));
 }
@@ -377,11 +377,9 @@ function DataTableView({ cellProps, filtering, grouping, loading, loadingOffset,
 }
 
 function GroupingButton({ row, }) {
-    return (React.createElement("button", Object.assign({ type: "button" }, {
-        onClick: row.getToggleExpandedHandler(),
+    return (React.createElement("button", { type: "button", onClick: row.getToggleExpandedHandler(),
         className: "btn btn-default",
-        style: { cursor: "pointer" },
-    }), row.getIsExpanded() ? (React.createElement("span", { className: "glyphicon glyphicon-remove-sign", "aria-hidden": "true" })) : (React.createElement("span", { className: "glyphicon glyphicon-duplicate", "aria-hidden": "true" }))));
+        style: { cursor: "pointer" } }, row.getIsExpanded() ? (React.createElement("span", { className: "glyphicon glyphicon-remove-sign", "aria-hidden": "true" })) : (React.createElement("span", { className: "glyphicon glyphicon-duplicate", "aria-hidden": "true" }))));
 }
 
 function styleInject(css, ref) {

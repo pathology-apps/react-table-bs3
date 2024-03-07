@@ -17,5 +17,5 @@ interface Person {
 }
 type BootstrapTableStory = StoryFn<BootstrapTableProps<Person>>;
 export declare const Default: BootstrapTableStory;
-declare const _default: import("@storybook/types").ComponentAnnotations<import("@storybook/react/dist/types-0a347bb9").R, import("@storybook/types").Args>;
+declare const _default: import("@storybook/types").ComponentAnnotations<import("@storybook/react").ReactRenderer, import("@storybook/types").Args>;
 export default _default;
